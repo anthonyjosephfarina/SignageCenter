@@ -1,6 +1,7 @@
 package com.guidewire.signagecenter.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.guidewire.signagecenter.model.audit.DateAuditable;
 import com.guidewire.signagecenter.model.slide.AbstractSlide;
 
@@ -17,6 +18,10 @@ public class Playlist extends DateAuditable {
 
     @Column(length = 100, nullable = false)
     private String name;
+
+    @JsonManagedReference
+    @ManyToOne
+    private Office office;
 
     @JsonBackReference
     @OneToMany(mappedBy = "playlist", fetch = FetchType.LAZY)
@@ -36,6 +41,14 @@ public class Playlist extends DateAuditable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Office getOffice() {
+        return office;
+    }
+
+    public void setOffice(Office office) {
+        this.office = office;
     }
 
     public List<AbstractSlide> getSlides() {

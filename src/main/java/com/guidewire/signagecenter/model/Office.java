@@ -1,14 +1,14 @@
 package com.guidewire.signagecenter.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.guidewire.signagecenter.model.audit.DateAuditable;
 import org.hibernate.annotations.NaturalId;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Office extends DateAuditable {
@@ -21,6 +21,10 @@ public class Office extends DateAuditable {
     @NaturalId
     @Size(max = 100)
     private String name;
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "office", fetch = FetchType.LAZY)
+    private List<Playlist> playlists = new ArrayList<>();
 
     public Office() {
 
@@ -40,5 +44,13 @@ public class Office extends DateAuditable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Playlist> getPlaylists() {
+        return playlists;
+    }
+
+    public void setPlaylists(List<Playlist> playlists) {
+        this.playlists = playlists;
     }
 }

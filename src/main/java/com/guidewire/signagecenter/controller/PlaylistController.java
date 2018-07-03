@@ -2,8 +2,6 @@ package com.guidewire.signagecenter.controller;
 
 import com.guidewire.signagecenter.model.Playlist;
 import com.guidewire.signagecenter.model.dto.PlaylistCreateDTO;
-import com.guidewire.signagecenter.model.slide.AbstractSlide;
-import com.guidewire.signagecenter.service.AbstractSlideService;
 import com.guidewire.signagecenter.service.PlaylistService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +25,7 @@ public class PlaylistController {
         Playlist playlist = new Playlist();
         playlist.setName(playlistCreateDTO.getName());
 
-        return playlistService.createPlaylist(playlist).getId();
+        return playlistService.createPlaylist(playlist, playlistCreateDTO.getOfficeId()).getId();
     }
 
     @GetMapping("/{playlistId}")

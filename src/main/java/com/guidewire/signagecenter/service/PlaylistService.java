@@ -1,6 +1,7 @@
 package com.guidewire.signagecenter.service;
 
 import com.guidewire.signagecenter.exception.ResourceNotFoundException;
+import com.guidewire.signagecenter.model.Office;
 import com.guidewire.signagecenter.model.Playlist;
 import com.guidewire.signagecenter.repository.PlaylistRepository;
 import org.slf4j.Logger;
@@ -18,7 +19,14 @@ public class PlaylistService {
     @Autowired
     private PlaylistRepository playlistRepository;
 
-    public Playlist createPlaylist(Playlist playlist) {
+    @Autowired
+    private OfficeService officeService;
+
+    public Playlist createPlaylist(Playlist playlist, Long officeId) {
+
+        Office office = officeService.getOffice(officeId);
+        playlist.setOffice(office);
+
         return playlistRepository.save(playlist);
     }
 
