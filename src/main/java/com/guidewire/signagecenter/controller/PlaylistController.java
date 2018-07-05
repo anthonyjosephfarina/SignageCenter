@@ -28,6 +28,11 @@ public class PlaylistController {
         return playlistService.createPlaylist(playlist, playlistCreateDTO.getOfficeId()).getId();
     }
 
+    @CrossOrigin
+    @DeleteMapping("/{playlistId}")
+    public void deletePlaylist(@PathVariable Long playlistId){
+        playlistService.deletePlaylist(playlistId);
+    }
     @GetMapping("/{playlistId}")
     public Playlist getPlaylist(@PathVariable Long playlistId) {
         return playlistService.getPlaylist(playlistId);

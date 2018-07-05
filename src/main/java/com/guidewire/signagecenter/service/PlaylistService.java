@@ -38,4 +38,8 @@ public class PlaylistService {
     public List<Playlist> getAll() {
         return playlistRepository.findAll();
     }
+
+    public void deletePlaylist(Long playlistId) {
+        playlistRepository.deleteById(playlistId);
+    }
 }
