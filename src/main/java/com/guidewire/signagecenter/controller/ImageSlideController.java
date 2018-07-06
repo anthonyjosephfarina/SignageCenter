@@ -1,7 +1,10 @@
 package com.guidewire.signagecenter.controller;
 
 import com.guidewire.signagecenter.model.dto.ImageSlideCreateDTO;
+import com.guidewire.signagecenter.model.dto.ImageUploadReponse;
+import com.guidewire.signagecenter.model.dto.slide.ImageSlideGetDTO;
 import com.guidewire.signagecenter.model.slide.ImageSlide;
+import com.guidewire.signagecenter.model.slide.SlideType;
 import com.guidewire.signagecenter.service.ImageSlideService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,22 +30,35 @@ public class ImageSlideController {
     private ImageSlideService imageSlideService;
 
     @PostMapping
-    public Long createImageSlide(@RequestBody ImageSlideCreateDTO imageSlideCreateDTO) {
+    public ImageSlideGetDTO createImageSlide(@RequestBody ImageSlideCreateDTO imageSlideCreateDTO) {
 
+        // create image slide
         ImageSlide imageSlide = new ImageSlide();
+        imageSlide.setSlideType(SlideType.IMAGE);
         imageSlide.setName(imageSlideCreateDTO.getName());
         imageSlide.setText(imageSlideCreateDTO.getText());
         imageSlide.setDuration(imageSlideCreateDTO.getDuration());
         imageSlide.setStartDate(imageSlideCreateDTO.getStartDate());
         imageSlide.setEndDate(imageSlideCreateDTO.getEndDate());
+        imageSlide = imageSlideService.createImageSlide(imageSlide, imageSlideCreateDTO.getPlaylistId());
 
-        return imageSlideService.createImageSlide(imageSlide, imageSlideCreateDTO.getPlaylistId()).getId();
+        // convert to dto
+        ImageSlideGetDTO imageSlideGetDTO = new ImageSlideGetDTO();
+        imageSlideGetDTO.setId(imageSlide.getId());
+        imageSlideGetDTO.setName(imageSlide.getName());
+        imageSlideGetDTO.setText(imageSlide.getText());
+        imageSlideGetDTO.setImageUrl(imageSlide.getImageUrl());
+        imageSlideGetDTO.setSlideType(imageSlide.getSlideType());
+        imageSlideGetDTO.setDuration(imageSlide.getDuration());
+        imageSlideGetDTO.setStartDate(imageSlide.getStartDate());
+        imageSlideGetDTO.setEndDate(imageSlide.getEndDate());
+
+        return imageSlideGetDTO;
     }
 
-    @PostMapping("/attach/{imageSlideId}")
-    public ResponseEntity<?> attachImage(@RequestParam("file") MultipartFile file, @PathVariable Long imageSlideId) {
-        imageSlideService.attachImage(file, imageSlideId);
-        return ResponseEntity.ok().build();
+    @PostMapping(value = "/attach/{imageSlideId}", produces = "application/json")
+    public ImageUploadReponse attachImage(@RequestParam("file") MultipartFile file, @PathVariable Long imageSlideId) {
+        return new ImageUploadReponse(imageSlideService.attachImage(file, imageSlideId).getImageUrl());
     }
 
     @GetMapping(value = "/download/{fileName:.+}")

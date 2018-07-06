@@ -40,6 +40,7 @@ public class PlaylistService {
     }
 
     public void deletePlaylist(Long playlistId) {
-        playlistRepository.deleteById(playlistId);
+        Playlist playlist = getPlaylist(playlistId);
+        playlistRepository.delete(playlist);
     }
 }
