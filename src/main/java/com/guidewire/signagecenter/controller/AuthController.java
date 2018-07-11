@@ -1,21 +1,19 @@
 package com.guidewire.signagecenter.controller;
 
-import com.guidewire.signagecenter.exception.AppException;
 import com.guidewire.signagecenter.model.*;
 import com.guidewire.signagecenter.model.dto.ApiResponse;
 import com.guidewire.signagecenter.repository.RoleRepository;
 import com.guidewire.signagecenter.repository.UserRepository;
 import com.guidewire.signagecenter.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +27,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
-@ComponentScan({"com.guidewire.signagecenter.security","com.guidewire.signagecenter.repository"})
+@Component
 public class AuthController {
 
     @Autowired
@@ -39,7 +37,7 @@ public class AuthController {
     UserRepository userRepository;
 
     @Autowired
-    RoleRepository roleRepository;
+    private RoleRepository roleRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -52,7 +50,7 @@ public class AuthController {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUserName(),
+                        loginRequest.getUsername(),
                         loginRequest.getPassword()
                 )
         );
@@ -65,7 +63,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-        if(userRepository.existsByUserName(signUpRequest.getUsername())) {
+        if(userRepository.existsByUsername(signUpRequest.getUsername())) {
             return new ResponseEntity(new ApiResponse(false, "Username is already taken!"),
                     HttpStatus.BAD_REQUEST);
         }
@@ -77,7 +75,7 @@ public class AuthController {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
        // Role userRole = new Role(RoleName.ROLE_USER);
-        //userRole.setId(new Long(1));
+      //  userRole.setId(new Long(1));
 
         Optional<Role> userRole = roleRepository.findByName(RoleName.ROLE_USER);
                 //.orElseThrow(() -> new AppException("User Role not set."));
@@ -88,7 +86,7 @@ public class AuthController {
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/users/{username}")
-                .buildAndExpand(result.getUserName()).toUri();
+                .buildAndExpand(result.getUsername()).toUri();
 
         return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
     }
