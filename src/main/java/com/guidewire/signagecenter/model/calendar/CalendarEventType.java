@@ -1,4 +1,4 @@
-package com.guidewire.signagecenter.model;
+package com.guidewire.signagecenter.model.calendar;
 
 public enum CalendarEventType {
 

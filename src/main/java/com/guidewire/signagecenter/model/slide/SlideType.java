@@ -14,10 +14,10 @@ public enum SlideType {
     }
 
     public static class Values {
-        public static final String IMAGE = "IMAGE";
-        public static final String CALENDAR = "CALENDAR";
-        public static final String WEATHER = "WEATHER";
-        public static final String POLL = "POLL";
-        public static final String MAP = "MAP";
+        static final String IMAGE = "IMAGE";
+        static final String CALENDAR = "CALENDAR";
+        static final String WEATHER = "WEATHER";
+        static final String POLL = "POLL";
+        static final String MAP = "MAP";
     }
 }

@@ -26,6 +26,10 @@ public class Office extends DateAuditable {
     @OneToMany(mappedBy = "office", fetch = FetchType.LAZY)
     private List<Playlist> playlists = new ArrayList<>();
 
+    @JsonBackReference
+    @OneToMany(mappedBy = "office", fetch = FetchType.LAZY)
+    private List<Calendar> calendars = new ArrayList<>();
+
     public Office() {
 
     }
@@ -52,5 +56,13 @@ public class Office extends DateAuditable {
 
     public void setPlaylists(List<Playlist> playlists) {
         this.playlists = playlists;
+    }
+
+    public List<Calendar> getCalendars() {
+        return calendars;
+    }
+
+    public void setCalendars(List<Calendar> calendars) {
+        this.calendars = calendars;
     }
 }
