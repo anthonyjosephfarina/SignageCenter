@@ -3,7 +3,6 @@ package com.guidewire.signagecenter.model.calendar;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.guidewire.signagecenter.model.Office;
 import com.guidewire.signagecenter.model.audit.DateAuditable;
-import org.hibernate.type.CalendarType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -19,7 +18,7 @@ public abstract class AbstractCalendar extends DateAuditable {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 30)
+    @Column(length = 30, nullable = false, insertable = false, updatable = false)
     private CalendarType type;
 
     @NotBlank
@@ -29,4 +28,36 @@ public abstract class AbstractCalendar extends DateAuditable {
     @JsonManagedReference
     @ManyToOne
     private Office office;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public CalendarType getType() {
+        return type;
+    }
+
+    public void setType(CalendarType type) {
+        this.type = type;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Office getOffice() {
+        return office;
+    }
+
+    public void setOffice(Office office) {
+        this.office = office;
+    }
 }

@@ -1,7 +1,12 @@
 package com.guidewire.signagecenter.controller;
 
-import com.guidewire.signagecenter.model.*;
+import com.guidewire.signagecenter.model.Role;
+import com.guidewire.signagecenter.model.RoleName;
+import com.guidewire.signagecenter.model.User;
 import com.guidewire.signagecenter.model.dto.ApiResponse;
+import com.guidewire.signagecenter.model.dto.JwtAuthenticationResponse;
+import com.guidewire.signagecenter.model.dto.LoginRequest;
+import com.guidewire.signagecenter.model.dto.SignUpRequest;
 import com.guidewire.signagecenter.repository.RoleRepository;
 import com.guidewire.signagecenter.repository.UserRepository;
 import com.guidewire.signagecenter.security.JwtTokenProvider;
@@ -31,19 +36,19 @@ import java.util.Optional;
 public class AuthController {
 
     @Autowired
-    AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private RoleRepository roleRepository;
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    JwtTokenProvider jwtTokenProvider;
+    private JwtTokenProvider jwtTokenProvider;
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {

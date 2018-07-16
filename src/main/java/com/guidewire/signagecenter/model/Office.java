@@ -2,6 +2,7 @@ package com.guidewire.signagecenter.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.guidewire.signagecenter.model.audit.DateAuditable;
+import com.guidewire.signagecenter.model.calendar.AbstractCalendar;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
@@ -28,7 +29,7 @@ public class Office extends DateAuditable {
 
     @JsonBackReference
     @OneToMany(mappedBy = "office", fetch = FetchType.LAZY)
-    private List<Calendar> calendars = new ArrayList<>();
+    private List<AbstractCalendar> calendars = new ArrayList<>();
 
     public Office() {
 
@@ -58,11 +59,11 @@ public class Office extends DateAuditable {
         this.playlists = playlists;
     }
 
-    public List<Calendar> getCalendars() {
+    public List<AbstractCalendar> getCalendars() {
         return calendars;
     }
 
-    public void setCalendars(List<Calendar> calendars) {
+    public void setCalendars(List<AbstractCalendar> calendars) {
         this.calendars = calendars;
     }
 }

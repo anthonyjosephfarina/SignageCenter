@@ -5,6 +5,6 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue(value = CalendarType.Values.INTERNAL)
-public class InternalCalendar {
+public class InternalCalendar extends AbstractCalendar {
 
 }
