@@ -1,7 +1,7 @@
 package com.guidewire.signagecenter.controller;
 
-import com.guidewire.signagecenter.model.dto.ImageSlideCreateDTO;
 import com.guidewire.signagecenter.model.dto.ImageUploadReponse;
+import com.guidewire.signagecenter.model.dto.slide.ImageSlideCreateDTO;
 import com.guidewire.signagecenter.model.dto.slide.ImageSlideGetDTO;
 import com.guidewire.signagecenter.model.slide.ImageSlide;
 import com.guidewire.signagecenter.model.slide.SlideType;

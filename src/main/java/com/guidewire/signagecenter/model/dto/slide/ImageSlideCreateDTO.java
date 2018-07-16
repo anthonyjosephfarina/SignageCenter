@@ -1,14 +1,12 @@
-package com.guidewire.signagecenter.model.dto;
+package com.guidewire.signagecenter.model.dto.slide;
 
 import java.time.Instant;
 
-public class MapSlideCreateDTO {
+public class ImageSlideCreateDTO {
 
     private String name;
 
-    private Double latCoord;
-
-    private Double longCoord;
+    private String text;
 
     private Double duration;
 
@@ -26,20 +24,12 @@ public class MapSlideCreateDTO {
         this.name = name;
     }
 
-    public Double getLatCoord() {
-        return latCoord;
+    public String getText() {
+        return text;
     }
 
-    public void setLatCoord(Double latCoord) {
-        this.latCoord = latCoord;
-    }
-
-    public Double getLongCoord() {
-        return longCoord;
-    }
-
-    public void setLongCoord(Double longCoord) {
-        this.longCoord = longCoord;
+    public void setText(String text) {
+        this.text = text;
     }
 
     public Double getDuration() {

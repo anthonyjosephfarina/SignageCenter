@@ -1,6 +1,6 @@
 package com.guidewire.signagecenter.controller;
 
-import com.guidewire.signagecenter.model.dto.WeatherSlideCreateDTO;
+import com.guidewire.signagecenter.model.dto.slide.WeatherSlideCreateDTO;
 import com.guidewire.signagecenter.model.dto.slide.WeatherSlideGetDTO;
 import com.guidewire.signagecenter.model.slide.SlideType;
 import com.guidewire.signagecenter.model.slide.WeatherSlide;

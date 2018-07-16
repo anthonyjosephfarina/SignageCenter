@@ -32,12 +32,7 @@ public class OfficeController {
         office = officeService.createOffice(office);
 
         // convert new office object to dto
-        OfficeGetDTO officeGetDTO = new OfficeGetDTO();
-        officeGetDTO.setId(office.getId());
-        officeGetDTO.setName(office.getName());
-        officeGetDTO.setCreatedAt(office.getCreatedAt());
-
-        return officeGetDTO;
+        return OfficeGetDTO.map(office);
     }
 
     @DeleteMapping("/{officeId}")
@@ -48,25 +43,12 @@ public class OfficeController {
 
     @GetMapping("/{officeId}")
     public OfficeGetDTO getOffice(@PathVariable Long officeId) {
-
         Office office = officeService.getOffice(officeId);
-
-        OfficeGetDTO officeGetDTO = new OfficeGetDTO();
-        officeGetDTO.setId(office.getId());
-        officeGetDTO.setName(office.getName());
-        officeGetDTO.setCreatedAt(office.getCreatedAt());
-
-        return officeGetDTO;
+        return OfficeGetDTO.map(office);
     }
 
     @GetMapping("/all")
     public List<OfficeGetDTO> getAllOffices() {
-        return officeService.getAll().stream().map(o -> {
-            OfficeGetDTO officeGetDTO = new OfficeGetDTO();
-            officeGetDTO.setId(o.getId());
-            officeGetDTO.setName(o.getName());
-            officeGetDTO.setCreatedAt(o.getCreatedAt());
-            return officeGetDTO;
-        }).collect(Collectors.toList());
+        return officeService.getAll().stream().map(OfficeGetDTO::map).collect(Collectors.toList());
     }
 }

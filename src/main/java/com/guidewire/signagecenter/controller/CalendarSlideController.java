@@ -1,6 +1,6 @@
 package com.guidewire.signagecenter.controller;
 
-import com.guidewire.signagecenter.model.dto.CalendarSlideCreateDTO;
+import com.guidewire.signagecenter.model.dto.slide.CalendarSlideCreateDTO;
 import com.guidewire.signagecenter.model.dto.slide.CalendarSlideGetDTO;
 import com.guidewire.signagecenter.model.slide.CalendarSlide;
 import com.guidewire.signagecenter.model.slide.SlideType;

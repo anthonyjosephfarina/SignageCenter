@@ -1,6 +1,6 @@
 package com.guidewire.signagecenter.controller;
 
-import com.guidewire.signagecenter.model.dto.MapSlideCreateDTO;
+import com.guidewire.signagecenter.model.dto.slide.MapSlideCreateDTO;
 import com.guidewire.signagecenter.model.dto.slide.MapSlideGetDTO;
 import com.guidewire.signagecenter.model.slide.MapSlide;
 import com.guidewire.signagecenter.model.slide.SlideType;

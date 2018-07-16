@@ -1,4 +1,4 @@
-package com.guidewire.signagecenter.model.dto;
+package com.guidewire.signagecenter.model.dto.slide;
 
 import java.time.Instant;
 
