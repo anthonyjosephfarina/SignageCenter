@@ -14,34 +14,32 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CurrentUserDetailsService implements UserDetailsService {
 
-    @Autowired
-    UserRepository userRepository;
+    final UserRepository userRepository;
+
+    final PasswordEncoder passwordEncoder;
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    public CurrentUserDetailsService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
-        // Let people login with either username or email
-        User user = new User(username,username,passwordEncoder.encode("safu123"));
-        user.setId(new Long(1));
-      /*  User user = userRepository.findByUserName(username)
+        User user = userRepository.findByUsername(username)
                 .orElseThrow(() ->
                         new UsernameNotFoundException("User not found with username or email : " + username)
-                );*/
-
+                );
         return UserPrincipal.create(user);
     }
 
     @Transactional
     public UserDetails loadUserById(Long id) {
-       /* User user = userRepository.findById(id).orElseThrow(
+        User user = userRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("User", "id", id)
-        );*/
-        User user = new User("safura","safura",passwordEncoder.encode("safu123"));
-        user.setId(new Long(1));
+        );
         return UserPrincipal.create(user);
     }
 }

@@ -21,14 +21,14 @@ public class User extends DateAuditable {
 
     @NotBlank
     @Size(max = 40)
-    private String userName;
+    private String username;
 
     @NotBlank
     @Size(max = 100)
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
@@ -36,7 +36,7 @@ public class User extends DateAuditable {
     public User(){}
     public User(String name, String username, String password) {
         this.name=name;
-        this.userName = username;
+        this.username = username;
         this.password=password;
     }
 
@@ -56,12 +56,12 @@ public class User extends DateAuditable {
         this.name = name;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
