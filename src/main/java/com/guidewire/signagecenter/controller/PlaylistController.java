@@ -1,8 +1,14 @@
 package com.guidewire.signagecenter.controller;
 
-import com.guidewire.signagecenter.model.Playlist;
+import com.guidewire.signagecenter.model.db.Playlist;
+import com.guidewire.signagecenter.model.db.slide.CalendarSlide;
+import com.guidewire.signagecenter.model.db.slide.ImageSlide;
+import com.guidewire.signagecenter.model.db.slide.MapSlide;
+import com.guidewire.signagecenter.model.db.slide.WeatherSlide;
 import com.guidewire.signagecenter.model.dto.PlaylistCreateDTO;
 import com.guidewire.signagecenter.model.dto.PlaylistGetDTO;
+import com.guidewire.signagecenter.model.dto.PlaylistPlayDTO;
+import com.guidewire.signagecenter.model.dto.slide.*;
 import com.guidewire.signagecenter.service.PlaylistService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,5 +56,49 @@ public class PlaylistController {
     @GetMapping("/all")
     public List<PlaylistGetDTO> getAllPlaylists() {
         return playlistService.getAll().stream().map(PlaylistGetDTO::map).collect(Collectors.toList());
+    }
+
+    /**
+     * Get all of the slides for the playlist
+     *
+     * @param playlistId
+     * @return
+     */
+    @GetMapping("/play/{playlistId}")
+    public PlaylistPlayDTO playPlaylist(@PathVariable Long playlistId) {
+        Playlist playlist = playlistService.getPlaylist(playlistId);
+
+        PlaylistPlayDTO playlistPlayDTO = new PlaylistPlayDTO();
+        playlistPlayDTO.setId(playlist.getId());
+
+        List<AbstractSlideGetDTO> slides = playlist.getSlides().stream().map(slide -> {
+            AbstractSlideGetDTO slideDTO = null;
+
+            switch (slide.getSlideType()) {
+                case MAP: {
+                    slideDTO = MapSlideGetDTO.map((MapSlide) slide);
+                    break;
+                }
+                case CALENDAR: {
+                    CalendarSlide calendarSlide = (CalendarSlide) slide;
+                    slideDTO = CalendarSlideGetDTO.map(calendarSlide);
+                    break;
+                }
+                case IMAGE: {
+                    slideDTO = ImageSlideGetDTO.map((ImageSlide) slide);
+                    break;
+                }
+                case WEATHER: {
+                    slideDTO = WeatherSlideGetDTO.map((WeatherSlide) slide);
+                    break;
+                }
+            }
+
+            return slideDTO;
+        }).collect(Collectors.toList());
+
+        playlistPlayDTO.setSlides(slides);
+
+        return playlistPlayDTO;
     }
 }

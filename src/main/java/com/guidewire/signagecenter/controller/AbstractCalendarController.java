@@ -1,8 +1,8 @@
 package com.guidewire.signagecenter.controller;
 
-import com.guidewire.signagecenter.model.calendar.AbstractCalendar;
-import com.guidewire.signagecenter.model.calendar.CalendarType;
-import com.guidewire.signagecenter.model.calendar.InternalCalendar;
+import com.guidewire.signagecenter.model.db.calendar.AbstractCalendar;
+import com.guidewire.signagecenter.model.db.calendar.CalendarType;
+import com.guidewire.signagecenter.model.db.calendar.InternalCalendar;
 import com.guidewire.signagecenter.model.dto.calendar.AbstractCalendarGetDTO;
 import com.guidewire.signagecenter.model.dto.calendar.InternalCalendarGetDTO;
 import com.guidewire.signagecenter.service.AbstractCalendarService;

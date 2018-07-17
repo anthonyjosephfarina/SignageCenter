@@ -1,4 +1,4 @@
-package com.guidewire.signagecenter.model.slide;
+package com.guidewire.signagecenter.model.db.slide;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
@@ -17,6 +17,8 @@ public class MapSlide extends AbstractSlide {
     @Column(scale = 9, precision = 6)
     private Double longCoord;
 
+    private String address;
+
     public Double getLatCoord() {
         return latCoord;
     }
@@ -31,5 +33,13 @@ public class MapSlide extends AbstractSlide {
 
     public void setLongCoord(Double longCoord) {
         this.longCoord = longCoord;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

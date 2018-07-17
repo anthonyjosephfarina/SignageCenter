@@ -1,9 +1,9 @@
 package com.guidewire.signagecenter.controller;
 
+import com.guidewire.signagecenter.model.db.slide.CalendarSlide;
+import com.guidewire.signagecenter.model.db.slide.SlideType;
 import com.guidewire.signagecenter.model.dto.slide.CalendarSlideCreateDTO;
 import com.guidewire.signagecenter.model.dto.slide.CalendarSlideGetDTO;
-import com.guidewire.signagecenter.model.slide.CalendarSlide;
-import com.guidewire.signagecenter.model.slide.SlideType;
 import com.guidewire.signagecenter.service.CalendarSlideService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/slide/calendar")
@@ -35,19 +36,11 @@ public class CalendarSlideController {
                 calendarSlideCreateDTO.getPlaylistId(), calendarSlideCreateDTO.getCalendarIds());
 
         // convert to dto
-        CalendarSlideGetDTO calendarSlideGetDTO = new CalendarSlideGetDTO();
-        calendarSlideGetDTO.setId(calendarSlide.getId());
-        calendarSlideGetDTO.setName(calendarSlide.getName());
-        calendarSlideGetDTO.setSlideType(calendarSlide.getSlideType());
-        calendarSlideGetDTO.setDuration(calendarSlide.getDuration());
-        calendarSlideGetDTO.setStartDate(calendarSlide.getStartDate());
-        calendarSlideGetDTO.setEndDate(calendarSlide.getEndDate());
-
-        return calendarSlideGetDTO;
+        return CalendarSlideGetDTO.map(calendarSlide);
     }
 
     @GetMapping("/all")
-    public List<CalendarSlide> getAllCalendarSlides() {
-        return calendarSlideService.getAll();
+    public List<CalendarSlideGetDTO> getAllCalendarSlides() {
+        return calendarSlideService.getAll().stream().map(CalendarSlideGetDTO::map).collect(Collectors.toList());
     }
 }

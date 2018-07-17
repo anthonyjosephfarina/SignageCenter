@@ -1,6 +1,5 @@
-package com.guidewire.signagecenter.model.slide;
+package com.guidewire.signagecenter.model.db.slide;
 
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;

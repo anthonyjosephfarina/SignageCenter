@@ -1,6 +1,6 @@
 package com.guidewire.signagecenter.model.dto.calendar;
 
-import com.guidewire.signagecenter.model.calendar.InternalCalendar;
+import com.guidewire.signagecenter.model.db.calendar.InternalCalendar;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,6 +1,6 @@
 package com.guidewire.signagecenter.model.dto;
 
-import com.guidewire.signagecenter.model.Playlist;
+import com.guidewire.signagecenter.model.db.Playlist;
 import com.guidewire.signagecenter.model.dto.slide.AbstractSlideGetDTO;
 
 import java.time.Instant;

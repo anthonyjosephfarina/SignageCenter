@@ -1,6 +1,6 @@
-package com.guidewire.signagecenter.model;
+package com.guidewire.signagecenter.model.db;
 
-import com.guidewire.signagecenter.model.audit.DateAuditable;
+import com.guidewire.signagecenter.model.db.audit.DateAuditable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

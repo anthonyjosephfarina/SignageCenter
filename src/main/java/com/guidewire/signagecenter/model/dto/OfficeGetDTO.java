@@ -1,6 +1,6 @@
 package com.guidewire.signagecenter.model.dto;
 
-import com.guidewire.signagecenter.model.Office;
+import com.guidewire.signagecenter.model.db.Office;
 
 import java.time.Instant;
 

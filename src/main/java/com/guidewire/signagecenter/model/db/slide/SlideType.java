@@ -1,10 +1,9 @@
-package com.guidewire.signagecenter.model.slide;
+package com.guidewire.signagecenter.model.db.slide;
 
 public enum SlideType {
     IMAGE(Values.IMAGE),
     CALENDAR(Values.CALENDAR),
     WEATHER(Values.WEATHER),
-    POLL(Values.POLL),
     MAP(Values.MAP);
 
     SlideType(String value) {
@@ -17,7 +16,6 @@ public enum SlideType {
         static final String IMAGE = "IMAGE";
         static final String CALENDAR = "CALENDAR";
         static final String WEATHER = "WEATHER";
-        static final String POLL = "POLL";
         static final String MAP = "MAP";
     }
 }

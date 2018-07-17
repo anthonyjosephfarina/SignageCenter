@@ -1,6 +1,6 @@
 package com.guidewire.signagecenter.model.dto.slide;
 
-import com.guidewire.signagecenter.model.slide.SlideType;
+import com.guidewire.signagecenter.model.db.slide.SlideType;
 
 import java.time.Instant;
 

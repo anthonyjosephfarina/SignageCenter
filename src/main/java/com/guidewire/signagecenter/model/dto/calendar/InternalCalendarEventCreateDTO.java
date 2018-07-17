@@ -1,6 +1,6 @@
 package com.guidewire.signagecenter.model.dto.calendar;
 
-import com.guidewire.signagecenter.model.calendar.CalendarEventType;
+import com.guidewire.signagecenter.model.db.calendar.CalendarEventType;
 
 import java.time.Instant;
 

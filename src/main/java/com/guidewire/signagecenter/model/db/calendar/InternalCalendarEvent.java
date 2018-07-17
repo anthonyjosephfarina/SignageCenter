@@ -1,7 +1,7 @@
-package com.guidewire.signagecenter.model.calendar;
+package com.guidewire.signagecenter.model.db.calendar;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.guidewire.signagecenter.model.audit.DateAuditable;
+import com.guidewire.signagecenter.model.db.audit.DateAuditable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

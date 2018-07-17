@@ -1,4 +1,4 @@
-package com.guidewire.signagecenter.model;
+package com.guidewire.signagecenter.model.db;
 
 import org.hibernate.annotations.NaturalId;
 

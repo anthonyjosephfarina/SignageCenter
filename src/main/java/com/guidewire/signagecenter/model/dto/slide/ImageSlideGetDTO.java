@@ -1,5 +1,7 @@
 package com.guidewire.signagecenter.model.dto.slide;
 
+import com.guidewire.signagecenter.model.db.slide.ImageSlide;
+
 public class ImageSlideGetDTO extends AbstractSlideGetDTO {
 
     private String text;
@@ -20,5 +22,18 @@ public class ImageSlideGetDTO extends AbstractSlideGetDTO {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public static ImageSlideGetDTO map(ImageSlide imageSlide) {
+        ImageSlideGetDTO imageSlideGetDTO = new ImageSlideGetDTO();
+        imageSlideGetDTO.setId(imageSlide.getId());
+        imageSlideGetDTO.setName(imageSlide.getName());
+        imageSlideGetDTO.setText(imageSlide.getText());
+        imageSlideGetDTO.setImageUrl(imageSlide.getImageUrl());
+        imageSlideGetDTO.setSlideType(imageSlide.getSlideType());
+        imageSlideGetDTO.setDuration(imageSlide.getDuration());
+        imageSlideGetDTO.setStartDate(imageSlide.getStartDate());
+        imageSlideGetDTO.setEndDate(imageSlide.getEndDate());
+        return imageSlideGetDTO;
     }
 }

@@ -1,6 +1,6 @@
 package com.guidewire.signagecenter.controller;
 
-import com.guidewire.signagecenter.model.Office;
+import com.guidewire.signagecenter.model.db.Office;
 import com.guidewire.signagecenter.model.dto.OfficeCreateDTO;
 import com.guidewire.signagecenter.model.dto.OfficeGetDTO;
 import com.guidewire.signagecenter.service.OfficeService;

@@ -1,8 +1,8 @@
 package com.guidewire.signagecenter.service;
 
 import com.guidewire.signagecenter.exception.ResourceNotFoundException;
-import com.guidewire.signagecenter.model.Playlist;
-import com.guidewire.signagecenter.model.slide.ImageSlide;
+import com.guidewire.signagecenter.model.db.Playlist;
+import com.guidewire.signagecenter.model.db.slide.ImageSlide;
 import com.guidewire.signagecenter.repository.ImageSlideRepository;
 import com.guidewire.signagecenter.service.storage.ImageStorageService;
 import org.slf4j.Logger;

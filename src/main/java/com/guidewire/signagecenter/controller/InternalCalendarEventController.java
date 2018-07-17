@@ -1,6 +1,6 @@
 package com.guidewire.signagecenter.controller;
 
-import com.guidewire.signagecenter.model.calendar.InternalCalendarEvent;
+import com.guidewire.signagecenter.model.db.calendar.InternalCalendarEvent;
 import com.guidewire.signagecenter.model.dto.calendar.CalendarEventGetDTO;
 import com.guidewire.signagecenter.model.dto.calendar.InternalCalendarEventCreateDTO;
 import com.guidewire.signagecenter.service.InternalCalendarEventService;

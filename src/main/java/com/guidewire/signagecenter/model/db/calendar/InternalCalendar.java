@@ -1,4 +1,4 @@
-package com.guidewire.signagecenter.model.calendar;
+package com.guidewire.signagecenter.model.db.calendar;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 

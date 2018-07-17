@@ -1,7 +1,7 @@
 package com.guidewire.signagecenter.service;
 
 import com.guidewire.signagecenter.exception.ResourceNotFoundException;
-import com.guidewire.signagecenter.model.calendar.AbstractCalendar;
+import com.guidewire.signagecenter.model.db.calendar.AbstractCalendar;
 import com.guidewire.signagecenter.repository.AbstractCalendarRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

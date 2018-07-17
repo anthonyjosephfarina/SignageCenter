@@ -1,9 +1,9 @@
-package com.guidewire.signagecenter.model;
+package com.guidewire.signagecenter.model.db;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.guidewire.signagecenter.model.audit.DateAuditable;
-import com.guidewire.signagecenter.model.slide.AbstractSlide;
+import com.guidewire.signagecenter.model.db.audit.DateAuditable;
+import com.guidewire.signagecenter.model.db.slide.AbstractSlide;
 
 import javax.persistence.*;
 import java.util.ArrayList;

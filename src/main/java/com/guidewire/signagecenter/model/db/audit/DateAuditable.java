@@ -1,4 +1,4 @@
-package com.guidewire.signagecenter.model.audit;
+package com.guidewire.signagecenter.model.db.audit;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;

@@ -1,10 +1,10 @@
 package com.guidewire.signagecenter.controller;
 
+import com.guidewire.signagecenter.model.db.slide.ImageSlide;
+import com.guidewire.signagecenter.model.db.slide.SlideType;
 import com.guidewire.signagecenter.model.dto.ImageUploadReponse;
 import com.guidewire.signagecenter.model.dto.slide.ImageSlideCreateDTO;
 import com.guidewire.signagecenter.model.dto.slide.ImageSlideGetDTO;
-import com.guidewire.signagecenter.model.slide.ImageSlide;
-import com.guidewire.signagecenter.model.slide.SlideType;
 import com.guidewire.signagecenter.service.ImageSlideService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/slide/image")
@@ -43,17 +44,7 @@ public class ImageSlideController {
         imageSlide = imageSlideService.createImageSlide(imageSlide, imageSlideCreateDTO.getPlaylistId());
 
         // convert to dto
-        ImageSlideGetDTO imageSlideGetDTO = new ImageSlideGetDTO();
-        imageSlideGetDTO.setId(imageSlide.getId());
-        imageSlideGetDTO.setName(imageSlide.getName());
-        imageSlideGetDTO.setText(imageSlide.getText());
-        imageSlideGetDTO.setImageUrl(imageSlide.getImageUrl());
-        imageSlideGetDTO.setSlideType(imageSlide.getSlideType());
-        imageSlideGetDTO.setDuration(imageSlide.getDuration());
-        imageSlideGetDTO.setStartDate(imageSlide.getStartDate());
-        imageSlideGetDTO.setEndDate(imageSlide.getEndDate());
-
-        return imageSlideGetDTO;
+        return ImageSlideGetDTO.map(imageSlide);
     }
 
     @PostMapping(value = "/attach/{imageSlideId}", produces = "application/json")
@@ -84,8 +75,8 @@ public class ImageSlideController {
     }
 
     @GetMapping("/all")
-    public List<ImageSlide> getAllImageSlides() {
-        return imageSlideService.getAll();
+    public List<ImageSlideGetDTO> getAllImageSlides() {
+        return imageSlideService.getAll().stream().map(ImageSlideGetDTO::map).collect(Collectors.toList());
     }
 
 }

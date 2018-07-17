@@ -1,9 +1,9 @@
 package com.guidewire.signagecenter.controller;
 
+import com.guidewire.signagecenter.model.db.slide.MapSlide;
+import com.guidewire.signagecenter.model.db.slide.SlideType;
 import com.guidewire.signagecenter.model.dto.slide.MapSlideCreateDTO;
 import com.guidewire.signagecenter.model.dto.slide.MapSlideGetDTO;
-import com.guidewire.signagecenter.model.slide.MapSlide;
-import com.guidewire.signagecenter.model.slide.SlideType;
 import com.guidewire.signagecenter.service.MapSlideService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/slide/map")
@@ -30,27 +31,18 @@ public class MapSlideController {
         mapSlide.setName(mapSlideCreateDTO.getName());
         mapSlide.setLatCoord(mapSlideCreateDTO.getLatCoord());
         mapSlide.setLongCoord(mapSlideCreateDTO.getLongCoord());
+        mapSlide.setAddress(mapSlideCreateDTO.getAddress());
         mapSlide.setDuration(mapSlideCreateDTO.getDuration());
         mapSlide.setStartDate(mapSlideCreateDTO.getStartDate());
         mapSlide.setEndDate(mapSlideCreateDTO.getEndDate());
         mapSlide = mapSlideService.createMapSlide(mapSlide, mapSlideCreateDTO.getPlaylistId());
 
         // convert to dto
-        MapSlideGetDTO mapSlideGetDTO = new MapSlideGetDTO();
-        mapSlideGetDTO.setId(mapSlide.getId());
-        mapSlideGetDTO.setName(mapSlide.getName());
-        mapSlideGetDTO.setLatCoord(mapSlide.getLatCoord());
-        mapSlideGetDTO.setLongCoord(mapSlide.getLongCoord());
-        mapSlideGetDTO.setSlideType(mapSlide.getSlideType());
-        mapSlideGetDTO.setDuration(mapSlide.getDuration());
-        mapSlideGetDTO.setStartDate(mapSlide.getStartDate());
-        mapSlideGetDTO.setEndDate(mapSlide.getEndDate());
-
-        return mapSlideGetDTO;
+        return MapSlideGetDTO.map(mapSlide);
     }
 
     @GetMapping("/all")
-    public List<MapSlide> getAllMapSlides() {
-        return mapSlideService.getAll();
+    public List<MapSlideGetDTO> getAllMapSlides() {
+        return mapSlideService.getAll().stream().map(MapSlideGetDTO::map).collect(Collectors.toList());
     }
 }

@@ -1,8 +1,8 @@
 package com.guidewire.signagecenter.controller;
 
-import com.guidewire.signagecenter.model.Role;
-import com.guidewire.signagecenter.model.RoleName;
-import com.guidewire.signagecenter.model.User;
+import com.guidewire.signagecenter.model.db.Role;
+import com.guidewire.signagecenter.model.db.RoleName;
+import com.guidewire.signagecenter.model.db.User;
 import com.guidewire.signagecenter.model.dto.ApiResponse;
 import com.guidewire.signagecenter.model.dto.JwtAuthenticationResponse;
 import com.guidewire.signagecenter.model.dto.LoginRequest;

@@ -1,8 +1,8 @@
 package com.guidewire.signagecenter.service;
 
 import com.guidewire.signagecenter.exception.ResourceNotFoundException;
-import com.guidewire.signagecenter.model.Office;
-import com.guidewire.signagecenter.model.calendar.InternalCalendar;
+import com.guidewire.signagecenter.model.db.Office;
+import com.guidewire.signagecenter.model.db.calendar.InternalCalendar;
 import com.guidewire.signagecenter.repository.InternalCalendarRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

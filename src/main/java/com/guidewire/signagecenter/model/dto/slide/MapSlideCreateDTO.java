@@ -10,6 +10,8 @@ public class MapSlideCreateDTO {
 
     private Double longCoord;
 
+    private String address;
+
     private Double duration;
 
     private Instant startDate;
@@ -40,6 +42,14 @@ public class MapSlideCreateDTO {
 
     public void setLongCoord(Double longCoord) {
         this.longCoord = longCoord;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Double getDuration() {

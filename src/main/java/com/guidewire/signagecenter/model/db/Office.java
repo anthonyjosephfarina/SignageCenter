@@ -1,8 +1,8 @@
-package com.guidewire.signagecenter.model;
+package com.guidewire.signagecenter.model.db;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.guidewire.signagecenter.model.audit.DateAuditable;
-import com.guidewire.signagecenter.model.calendar.AbstractCalendar;
+import com.guidewire.signagecenter.model.db.audit.DateAuditable;
+import com.guidewire.signagecenter.model.db.calendar.AbstractCalendar;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;

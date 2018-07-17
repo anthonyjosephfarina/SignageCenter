@@ -1,7 +1,7 @@
 package com.guidewire.signagecenter.security;
 
 import com.guidewire.signagecenter.exception.ResourceNotFoundException;
-import com.guidewire.signagecenter.model.User;
+import com.guidewire.signagecenter.model.db.User;
 import com.guidewire.signagecenter.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

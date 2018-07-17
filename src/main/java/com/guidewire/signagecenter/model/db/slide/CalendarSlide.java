@@ -1,7 +1,7 @@
-package com.guidewire.signagecenter.model.slide;
+package com.guidewire.signagecenter.model.db.slide;
 
 
-import com.guidewire.signagecenter.model.calendar.AbstractCalendar;
+import com.guidewire.signagecenter.model.db.calendar.AbstractCalendar;
 
 import javax.persistence.*;
 import java.util.ArrayList;

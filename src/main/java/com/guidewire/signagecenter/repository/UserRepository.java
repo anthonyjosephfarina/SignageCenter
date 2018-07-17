@@ -1,6 +1,6 @@
 package com.guidewire.signagecenter.repository;
 
-import com.guidewire.signagecenter.model.User;
+import com.guidewire.signagecenter.model.db.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

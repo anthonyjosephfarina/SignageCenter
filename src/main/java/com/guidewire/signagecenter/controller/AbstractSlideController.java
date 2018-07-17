@@ -1,6 +1,6 @@
 package com.guidewire.signagecenter.controller;
 
-import com.guidewire.signagecenter.model.slide.AbstractSlide;
+import com.guidewire.signagecenter.model.db.slide.AbstractSlide;
 import com.guidewire.signagecenter.service.AbstractSlideService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
