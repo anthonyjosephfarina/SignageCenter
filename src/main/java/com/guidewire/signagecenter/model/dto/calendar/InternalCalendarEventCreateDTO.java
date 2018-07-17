@@ -2,8 +2,7 @@ package com.guidewire.signagecenter.model.dto.calendar;
 
 import com.guidewire.signagecenter.model.calendar.CalendarEventType;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.Instant;
 
 public class InternalCalendarEventCreateDTO {
 
@@ -13,9 +12,9 @@ public class InternalCalendarEventCreateDTO {
 
     private CalendarEventType type;
 
-    private LocalDate date;
+    private Instant date;
 
-    private LocalTime time;
+    private boolean allDay = true;
 
     private Long calendarId;
 
@@ -43,20 +42,20 @@ public class InternalCalendarEventCreateDTO {
         this.type = type;
     }
 
-    public LocalDate getDate() {
+    public Instant getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Instant date) {
         this.date = date;
     }
 
-    public LocalTime getTime() {
-        return time;
+    public boolean isAllDay() {
+        return allDay;
     }
 
-    public void setTime(LocalTime time) {
-        this.time = time;
+    public void setAllDay(boolean allDay) {
+        this.allDay = allDay;
     }
 
     public Long getCalendarId() {

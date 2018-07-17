@@ -1,6 +1,8 @@
 package com.guidewire.signagecenter.model.dto.slide;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CalendarSlideCreateDTO {
 
@@ -13,6 +15,8 @@ public class CalendarSlideCreateDTO {
     private Instant endDate;
 
     private Long playlistId;
+
+    private List<Long> calendarIds = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -52,5 +56,13 @@ public class CalendarSlideCreateDTO {
 
     public void setPlaylistId(Long playlistId) {
         this.playlistId = playlistId;
+    }
+
+    public List<Long> getCalendarIds() {
+        return calendarIds;
+    }
+
+    public void setCalendarIds(List<Long> calendarIds) {
+        this.calendarIds = calendarIds;
     }
 }

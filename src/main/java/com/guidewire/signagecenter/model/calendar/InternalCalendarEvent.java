@@ -1,15 +1,15 @@
 package com.guidewire.signagecenter.model.calendar;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.guidewire.signagecenter.model.audit.DateAuditable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.Instant;
 
 @Entity
-public class InternalCalendarEvent {
+public class InternalCalendarEvent extends DateAuditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,10 +20,10 @@ public class InternalCalendarEvent {
     private CalendarEventType type;
 
     @Column(nullable = false)
-    private LocalDate date;
+    private Instant date;
 
-    @Column(nullable = true)
-    private LocalTime time;
+    @Column(nullable = false)
+    private boolean allDay = true;
 
     @NotBlank
     @Size(max = 100)
@@ -52,20 +52,20 @@ public class InternalCalendarEvent {
         this.type = type;
     }
 
-    public LocalDate getDate() {
+    public Instant getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Instant date) {
         this.date = date;
     }
 
-    public LocalTime getTime() {
-        return time;
+    public boolean isAllDay() {
+        return allDay;
     }
 
-    public void setTime(LocalTime time) {
-        this.time = time;
+    public void setAllDay(boolean allDay) {
+        this.allDay = allDay;
     }
 
     public String getName() {

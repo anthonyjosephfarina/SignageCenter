@@ -32,14 +32,7 @@ public class PlaylistController {
         playlist = playlistService.createPlaylist(playlist, playlistCreateDTO.getOfficeId());
 
         // convert playlist to dto
-        PlaylistGetDTO playlistGetDTO = new PlaylistGetDTO();
-        playlistGetDTO.setId(playlist.getId());
-        playlistGetDTO.setName(playlist.getName());
-        playlistGetDTO.setOfficeId(playlist.getOffice().getId());
-        playlistGetDTO.setOfficeName(playlist.getOffice().getName());
-        playlistGetDTO.setCreatedAt(playlist.getCreatedAt());
-
-        return playlistGetDTO;
+        return PlaylistGetDTO.map(playlist);
     }
 
     @DeleteMapping("/{playlistId}")
@@ -49,20 +42,13 @@ public class PlaylistController {
     }
 
     @GetMapping("/{playlistId}")
-    public Playlist getPlaylist(@PathVariable Long playlistId) {
-        return playlistService.getPlaylist(playlistId);
+    public PlaylistGetDTO getPlaylist(@PathVariable Long playlistId) {
+        Playlist playlist = playlistService.getPlaylist(playlistId);
+        return PlaylistGetDTO.map(playlist);
     }
 
     @GetMapping("/all")
     public List<PlaylistGetDTO> getAllPlaylists() {
-        return playlistService.getAll().stream().map(playlist -> {
-            PlaylistGetDTO playlistGetDTO = new PlaylistGetDTO();
-            playlistGetDTO.setId(playlist.getId());
-            playlistGetDTO.setName(playlist.getName());
-            playlistGetDTO.setOfficeId(playlist.getOffice().getId());
-            playlistGetDTO.setOfficeName(playlist.getOffice().getName());
-            playlistGetDTO.setCreatedAt(playlist.getCreatedAt());
-            return playlistGetDTO;
-        }).collect(Collectors.toList());
+        return playlistService.getAll().stream().map(PlaylistGetDTO::map).collect(Collectors.toList());
     }
 }

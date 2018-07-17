@@ -29,7 +29,7 @@ public class InternalCalendarEventController {
         internalCalendarEvent.setDescription(internalCalendarEventCreateDTO.getDescription());
         internalCalendarEvent.setType(internalCalendarEventCreateDTO.getType());
         internalCalendarEvent.setDate(internalCalendarEventCreateDTO.getDate());
-        internalCalendarEvent.setTime(internalCalendarEventCreateDTO.getTime());
+        internalCalendarEvent.setAllDay(internalCalendarEventCreateDTO.isAllDay());
         internalCalendarEvent = internalCalendarEventService.create(internalCalendarEvent, internalCalendarEventCreateDTO.getCalendarId());
 
         return CalendarEventGetDTO.map(internalCalendarEvent);

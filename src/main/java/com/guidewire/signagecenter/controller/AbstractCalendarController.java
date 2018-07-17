@@ -35,6 +35,16 @@ public class AbstractCalendarController {
         }).collect(Collectors.toList());
     }
 
+    @GetMapping("/all/office/{officeId}")
+    public List<AbstractCalendarGetDTO> getAllByOffice(@PathVariable Long officeId) {
+        return abstractCalendarService.getAllByOffice(officeId).stream().map(cal -> {
+            if (cal.getType() == CalendarType.INTERNAL) {
+                return InternalCalendarGetDTO.map(((InternalCalendar) cal));
+            }
+            return new InternalCalendarGetDTO();
+        }).collect(Collectors.toList());
+    }
+
     @GetMapping("/{calendarId}")
     public AbstractCalendarGetDTO getCalendar(@PathVariable Long calendarId) {
         AbstractCalendar calendar = abstractCalendarService.getCalendar(calendarId);

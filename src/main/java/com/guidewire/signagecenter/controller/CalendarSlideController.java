@@ -31,7 +31,8 @@ public class CalendarSlideController {
         calendarSlide.setDuration(calendarSlideCreateDTO.getDuration());
         calendarSlide.setStartDate(calendarSlideCreateDTO.getStartDate());
         calendarSlide.setEndDate(calendarSlideCreateDTO.getEndDate());
-        calendarSlide = calendarSlideService.createCalendarSlide(calendarSlide, calendarSlideCreateDTO.getPlaylistId());
+        calendarSlide = calendarSlideService.createCalendarSlide(calendarSlide,
+                calendarSlideCreateDTO.getPlaylistId(), calendarSlideCreateDTO.getCalendarIds());
 
         // convert to dto
         CalendarSlideGetDTO calendarSlideGetDTO = new CalendarSlideGetDTO();

@@ -27,6 +27,10 @@ public class AbstractCalendarService {
         return abstractCalendarRepository.findAll();
     }
 
+    public List<AbstractCalendar> getAllByOffice(Long officeId) {
+        return abstractCalendarRepository.findByOfficeId(officeId);
+    }
+
     public void deleteCalendar(Long calendarId) {
         AbstractCalendar calendar = getCalendar(calendarId);
         abstractCalendarRepository.delete(calendar);
