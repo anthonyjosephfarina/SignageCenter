@@ -28,11 +28,16 @@ public class PlaylistService {
     @Autowired
     private OfficeRepository officeRepository;
 
-    public PlaylistEntity createPlaylist(PlaylistEntity playlistEntity, Long officeId) {
+    public PlaylistEntity createPlaylist(PlaylistEntity playlistEntity, Long officeId, List<Long> subscribedPlaylistIds) {
 
         OfficeEntity officeEntity = officeRepository.findById(officeId).orElseThrow(() ->
                 new ResourceNotFoundException("OfficeEntity", "id", officeId));
         playlistEntity.setOffice(officeEntity);
+
+        List<PlaylistEntity> subscribedPlaylists = subscribedPlaylistIds.stream()
+                .map(id -> getPlaylist(id))
+                .collect(Collectors.toList());
+        playlistEntity.setSubscribedPlaylistEntities(subscribedPlaylists);
 
         return playlistRepository.save(playlistEntity);
     }

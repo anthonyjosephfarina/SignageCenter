@@ -37,7 +37,8 @@ public class PlaylistController {
         // create playlistEntity
         PlaylistEntity playlistEntity = new PlaylistEntity();
         playlistEntity.setName(playlistCreateDTO.getName());
-        playlistEntity = playlistService.createPlaylist(playlistEntity, playlistCreateDTO.getOfficeId());
+        playlistEntity = playlistService.createPlaylist(playlistEntity, playlistCreateDTO.getOfficeId(),
+                playlistCreateDTO.getSubscribedPlaylistIds());
 
         // convert playlistEntity to dto
         return PlaylistGetDTO.map(playlistEntity);
