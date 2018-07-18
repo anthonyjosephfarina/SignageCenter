@@ -1,6 +1,6 @@
 package com.guidewire.signagecenter.model.dto;
 
-import com.guidewire.signagecenter.model.db.Playlist;
+import com.guidewire.signagecenter.model.db.PlaylistEntity;
 import com.guidewire.signagecenter.model.dto.slide.AbstractSlideGetDTO;
 
 import java.time.Instant;
@@ -69,13 +69,13 @@ public class PlaylistGetDTO {
         this.createdAt = createdAt;
     }
 
-    public static PlaylistGetDTO map(Playlist playlist) {
+    public static PlaylistGetDTO map(PlaylistEntity playlistEntity) {
         PlaylistGetDTO playlistGetDTO = new PlaylistGetDTO();
-        playlistGetDTO.setId(playlist.getId());
-        playlistGetDTO.setName(playlist.getName());
-        playlistGetDTO.setOfficeId(playlist.getOffice().getId());
-        playlistGetDTO.setOfficeName(playlist.getOffice().getName());
-        playlistGetDTO.setCreatedAt(playlist.getCreatedAt());
+        playlistGetDTO.setId(playlistEntity.getId());
+        playlistGetDTO.setName(playlistEntity.getName());
+        playlistGetDTO.setOfficeId(playlistEntity.getOffice().getId());
+        playlistGetDTO.setOfficeName(playlistEntity.getOffice().getName());
+        playlistGetDTO.setCreatedAt(playlistEntity.getCreatedAt());
         return playlistGetDTO;
     }
 }

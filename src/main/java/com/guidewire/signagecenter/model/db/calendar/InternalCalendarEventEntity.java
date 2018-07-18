@@ -1,37 +1,40 @@
 package com.guidewire.signagecenter.model.db.calendar;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.guidewire.signagecenter.model.db.Office;
-import com.guidewire.signagecenter.model.db.audit.DateAuditable;
+import com.guidewire.signagecenter.model.db.audit.DateAuditableEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.time.Instant;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
-public abstract class AbstractCalendar extends DateAuditable {
+public class InternalCalendarEventEntity extends DateAuditableEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 30, nullable = false, insertable = false, updatable = false)
-    private CalendarType type;
+    @Column(length = 30)
+    private CalendarEventType type;
+
+    @Column(nullable = false)
+    private Instant date;
+
+    @Column(nullable = false)
+    private boolean allDay = true;
 
     @NotBlank
     @Size(max = 100)
     private String name;
 
-    @NotBlank
     @Size(max = 250)
     private String description;
 
     @JsonManagedReference
     @ManyToOne
-    private Office office;
+    private InternalCalendarEntity calendar;
 
     public Long getId() {
         return id;
@@ -41,12 +44,28 @@ public abstract class AbstractCalendar extends DateAuditable {
         this.id = id;
     }
 
-    public CalendarType getType() {
+    public CalendarEventType getType() {
         return type;
     }
 
-    public void setType(CalendarType type) {
+    public void setType(CalendarEventType type) {
         this.type = type;
+    }
+
+    public Instant getDate() {
+        return date;
+    }
+
+    public void setDate(Instant date) {
+        this.date = date;
+    }
+
+    public boolean isAllDay() {
+        return allDay;
+    }
+
+    public void setAllDay(boolean allDay) {
+        this.allDay = allDay;
     }
 
     public String getName() {
@@ -65,11 +84,11 @@ public abstract class AbstractCalendar extends DateAuditable {
         this.description = description;
     }
 
-    public Office getOffice() {
-        return office;
+    public InternalCalendarEntity getCalendar() {
+        return calendar;
     }
 
-    public void setOffice(Office office) {
-        this.office = office;
+    public void setCalendar(InternalCalendarEntity calendar) {
+        this.calendar = calendar;
     }
 }

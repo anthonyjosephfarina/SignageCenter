@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue(value = SlideType.Values.IMAGE)
-public class ImageSlide extends AbstractSlide {
+public class ImageSlideEntity extends AbstractSlideEntity {
 
     @Column(length = 250)
     private String text;

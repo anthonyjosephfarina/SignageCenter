@@ -1,6 +1,6 @@
 package com.guidewire.signagecenter.model.dto.slide;
 
-import com.guidewire.signagecenter.model.db.slide.ImageSlide;
+import com.guidewire.signagecenter.model.db.slide.ImageSlideEntity;
 
 public class ImageSlideGetDTO extends AbstractSlideGetDTO {
 
@@ -24,7 +24,7 @@ public class ImageSlideGetDTO extends AbstractSlideGetDTO {
         this.imageUrl = imageUrl;
     }
 
-    public static ImageSlideGetDTO map(ImageSlide imageSlide) {
+    public static ImageSlideGetDTO map(ImageSlideEntity imageSlide) {
         ImageSlideGetDTO imageSlideGetDTO = new ImageSlideGetDTO();
         imageSlideGetDTO.setId(imageSlide.getId());
         imageSlideGetDTO.setName(imageSlide.getName());

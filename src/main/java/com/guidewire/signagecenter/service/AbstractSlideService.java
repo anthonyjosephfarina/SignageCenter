@@ -1,8 +1,8 @@
 package com.guidewire.signagecenter.service;
 
 import com.guidewire.signagecenter.exception.ResourceNotFoundException;
-import com.guidewire.signagecenter.model.db.Playlist;
-import com.guidewire.signagecenter.model.db.slide.AbstractSlide;
+import com.guidewire.signagecenter.model.db.PlaylistEntity;
+import com.guidewire.signagecenter.model.db.slide.AbstractSlideEntity;
 import com.guidewire.signagecenter.repository.AbstractSlideRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,22 +22,22 @@ public class AbstractSlideService {
     @Autowired
     private PlaylistService playlistService;
 
-    public AbstractSlide getSlide(Long slideId) {
+    public AbstractSlideEntity getSlide(Long slideId) {
         return abstractSlideRepository.findById(slideId).orElseThrow(() ->
-                new ResourceNotFoundException("AbstractSlide", "id", slideId));
+                new ResourceNotFoundException("AbstractSlideEntity", "id", slideId));
     }
 
-    public List<AbstractSlide> getAll() {
+    public List<AbstractSlideEntity> getAll() {
         return abstractSlideRepository.findAll();
     }
 
-    public List<AbstractSlide> getAllByPlaylist(Long playlistId) {
-        Playlist playlist = playlistService.getPlaylist(playlistId);
-        return playlist.getSlides();
+    public List<AbstractSlideEntity> getAllByPlaylist(Long playlistId) {
+        PlaylistEntity playlistEntity = playlistService.getPlaylist(playlistId);
+        return playlistEntity.getSlides();
     }
 
     public void deleteSlide(Long slideId) {
-        AbstractSlide slide = getSlide(slideId);
+        AbstractSlideEntity slide = getSlide(slideId);
         abstractSlideRepository.delete(slide);
     }
 }

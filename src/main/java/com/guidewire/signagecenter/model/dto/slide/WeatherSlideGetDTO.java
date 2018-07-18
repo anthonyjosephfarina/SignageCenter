@@ -1,6 +1,6 @@
 package com.guidewire.signagecenter.model.dto.slide;
 
-import com.guidewire.signagecenter.model.db.slide.WeatherSlide;
+import com.guidewire.signagecenter.model.db.slide.WeatherSlideEntity;
 
 public class WeatherSlideGetDTO extends AbstractSlideGetDTO {
 
@@ -14,7 +14,7 @@ public class WeatherSlideGetDTO extends AbstractSlideGetDTO {
         this.cityId = cityId;
     }
 
-    public static WeatherSlideGetDTO map(WeatherSlide weatherSlide) {
+    public static WeatherSlideGetDTO map(WeatherSlideEntity weatherSlide) {
         WeatherSlideGetDTO weatherSlideGetDTO = new WeatherSlideGetDTO();
         weatherSlideGetDTO.setId(weatherSlide.getId());
         weatherSlideGetDTO.setName(weatherSlide.getName());

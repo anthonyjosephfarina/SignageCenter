@@ -1,8 +1,8 @@
 package com.guidewire.signagecenter.controller;
 
-import com.guidewire.signagecenter.model.db.calendar.AbstractCalendar;
+import com.guidewire.signagecenter.model.db.calendar.AbstractCalendarEntity;
 import com.guidewire.signagecenter.model.db.calendar.CalendarType;
-import com.guidewire.signagecenter.model.db.calendar.InternalCalendar;
+import com.guidewire.signagecenter.model.db.calendar.InternalCalendarEntity;
 import com.guidewire.signagecenter.model.dto.calendar.AbstractCalendarGetDTO;
 import com.guidewire.signagecenter.model.dto.calendar.InternalCalendarGetDTO;
 import com.guidewire.signagecenter.service.AbstractCalendarService;
@@ -29,7 +29,7 @@ public class AbstractCalendarController {
     public List<AbstractCalendarGetDTO> getAll() {
         return abstractCalendarService.getAll().stream().map(cal -> {
             if (cal.getType() == CalendarType.INTERNAL) {
-                return InternalCalendarGetDTO.map(((InternalCalendar) cal));
+                return InternalCalendarGetDTO.map(((InternalCalendarEntity) cal));
             }
             return new InternalCalendarGetDTO();
         }).collect(Collectors.toList());
@@ -39,7 +39,7 @@ public class AbstractCalendarController {
     public List<AbstractCalendarGetDTO> getAllByOffice(@PathVariable Long officeId) {
         return abstractCalendarService.getAllByOffice(officeId).stream().map(cal -> {
             if (cal.getType() == CalendarType.INTERNAL) {
-                return InternalCalendarGetDTO.map(((InternalCalendar) cal));
+                return InternalCalendarGetDTO.map(((InternalCalendarEntity) cal));
             }
             return new InternalCalendarGetDTO();
         }).collect(Collectors.toList());
@@ -47,10 +47,10 @@ public class AbstractCalendarController {
 
     @GetMapping("/{calendarId}")
     public AbstractCalendarGetDTO getCalendar(@PathVariable Long calendarId) {
-        AbstractCalendar calendar = abstractCalendarService.getCalendar(calendarId);
+        AbstractCalendarEntity calendar = abstractCalendarService.getCalendar(calendarId);
 
         if (calendar.getType() == CalendarType.INTERNAL) {
-            return InternalCalendarGetDTO.map((InternalCalendar) calendar);
+            return InternalCalendarGetDTO.map((InternalCalendarEntity) calendar);
         }
 
         return null;

@@ -1,8 +1,8 @@
 package com.guidewire.signagecenter.model.db;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.guidewire.signagecenter.model.db.audit.DateAuditable;
-import com.guidewire.signagecenter.model.db.calendar.AbstractCalendar;
+import com.guidewire.signagecenter.model.db.audit.DateAuditableEntity;
+import com.guidewire.signagecenter.model.db.calendar.AbstractCalendarEntity;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
@@ -12,7 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Office extends DateAuditable {
+@Table(name = "OFFICE")
+public class OfficeEntity extends DateAuditableEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,13 +26,13 @@ public class Office extends DateAuditable {
 
     @JsonBackReference
     @OneToMany(mappedBy = "office", fetch = FetchType.LAZY)
-    private List<Playlist> playlists = new ArrayList<>();
+    private List<PlaylistEntity> playlists = new ArrayList<>();
 
     @JsonBackReference
     @OneToMany(mappedBy = "office", fetch = FetchType.LAZY)
-    private List<AbstractCalendar> calendars = new ArrayList<>();
+    private List<AbstractCalendarEntity> calendars = new ArrayList<>();
 
-    public Office() {
+    public OfficeEntity() {
 
     }
 
@@ -51,19 +52,19 @@ public class Office extends DateAuditable {
         this.name = name;
     }
 
-    public List<Playlist> getPlaylists() {
+    public List<PlaylistEntity> getPlaylists() {
         return playlists;
     }
 
-    public void setPlaylists(List<Playlist> playlists) {
+    public void setPlaylists(List<PlaylistEntity> playlists) {
         this.playlists = playlists;
     }
 
-    public List<AbstractCalendar> getCalendars() {
+    public List<AbstractCalendarEntity> getCalendars() {
         return calendars;
     }
 
-    public void setCalendars(List<AbstractCalendar> calendars) {
+    public void setCalendars(List<AbstractCalendarEntity> calendars) {
         this.calendars = calendars;
     }
 }

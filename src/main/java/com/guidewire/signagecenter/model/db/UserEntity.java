@@ -1,6 +1,6 @@
 package com.guidewire.signagecenter.model.db;
 
-import com.guidewire.signagecenter.model.db.audit.DateAuditable;
+import com.guidewire.signagecenter.model.db.audit.DateAuditableEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -9,8 +9,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="user")
-public class User extends DateAuditable {
+@Table(name = "USER")
+public class UserEntity extends DateAuditableEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,11 +30,13 @@ public class User extends DateAuditable {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+    private Set<RoleEntity> roles = new HashSet<>();
 
 
-    public User(){}
-    public User(String name, String username, String password) {
+    public UserEntity() {
+    }
+
+    public UserEntity(String name, String username, String password) {
         this.name=name;
         this.username = username;
         this.password=password;
@@ -72,11 +74,11 @@ public class User extends DateAuditable {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
+    public Set<RoleEntity> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(Set<RoleEntity> roles) {
         this.roles = roles;
     }
 }

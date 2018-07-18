@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @DiscriminatorValue(value = SlideType.Values.MAP)
-public class MapSlide extends AbstractSlide {
+public class MapSlideEntity extends AbstractSlideEntity {
 
     @NotNull
     @Column(scale = 9, precision = 6)

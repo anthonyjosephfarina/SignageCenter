@@ -1,7 +1,7 @@
 package com.guidewire.signagecenter.security;
 
 import com.guidewire.signagecenter.exception.ResourceNotFoundException;
-import com.guidewire.signagecenter.model.db.User;
+import com.guidewire.signagecenter.model.db.UserEntity;
 import com.guidewire.signagecenter.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,18 +23,18 @@ public class CurrentUserDetailsService implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username)
+        UserEntity userEntity = userRepository.findByUsername(username)
                 .orElseThrow(() ->
-                        new UsernameNotFoundException("User not found with username or email : " + username)
+                        new UsernameNotFoundException("UserEntity not found with username or email : " + username)
                 );
-        return UserPrincipal.create(user);
+        return UserPrincipal.create(userEntity);
     }
 
     @Transactional
     public UserDetails loadUserById(Long id) {
-        User user = userRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("User", "id", id)
+        UserEntity userEntity = userRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("UserEntity", "id", id)
         );
-        return UserPrincipal.create(user);
+        return UserPrincipal.create(userEntity);
     }
 }

@@ -1,7 +1,7 @@
 package com.guidewire.signagecenter.controller;
 
 import com.guidewire.signagecenter.model.db.slide.SlideType;
-import com.guidewire.signagecenter.model.db.slide.WeatherSlide;
+import com.guidewire.signagecenter.model.db.slide.WeatherSlideEntity;
 import com.guidewire.signagecenter.model.dto.slide.WeatherSlideCreateDTO;
 import com.guidewire.signagecenter.model.dto.slide.WeatherSlideGetDTO;
 import com.guidewire.signagecenter.service.WeatherSlideService;
@@ -26,7 +26,7 @@ public class WeatherSlideController {
     public WeatherSlideGetDTO createWeatherSlide(@RequestBody WeatherSlideCreateDTO weatherSlideCreateDTO) {
 
         // create slide
-        WeatherSlide weatherSlide = new WeatherSlide();
+        WeatherSlideEntity weatherSlide = new WeatherSlideEntity();
         weatherSlide.setSlideType(SlideType.WEATHER);
         weatherSlide.setName(weatherSlideCreateDTO.getName());
         weatherSlide.setDuration(weatherSlideCreateDTO.getDuration());

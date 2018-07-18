@@ -1,6 +1,6 @@
 package com.guidewire.signagecenter.controller;
 
-import com.guidewire.signagecenter.model.db.Office;
+import com.guidewire.signagecenter.model.db.OfficeEntity;
 import com.guidewire.signagecenter.model.dto.OfficeCreateDTO;
 import com.guidewire.signagecenter.model.dto.OfficeGetDTO;
 import com.guidewire.signagecenter.service.OfficeService;
@@ -26,13 +26,13 @@ public class OfficeController {
     @PostMapping
     public OfficeGetDTO createOffice(@RequestBody OfficeCreateDTO officeCreateDTO) {
 
-        // create office
-        Office office = new Office();
-        office.setName(officeCreateDTO.getName());
-        office = officeService.createOffice(office);
+        // create officeEntity
+        OfficeEntity officeEntity = new OfficeEntity();
+        officeEntity.setName(officeCreateDTO.getName());
+        officeEntity = officeService.createOffice(officeEntity);
 
-        // convert new office object to dto
-        return OfficeGetDTO.map(office);
+        // convert new officeEntity object to dto
+        return OfficeGetDTO.map(officeEntity);
     }
 
     @DeleteMapping("/{officeId}")
@@ -43,8 +43,8 @@ public class OfficeController {
 
     @GetMapping("/{officeId}")
     public OfficeGetDTO getOffice(@PathVariable Long officeId) {
-        Office office = officeService.getOffice(officeId);
-        return OfficeGetDTO.map(office);
+        OfficeEntity officeEntity = officeService.getOffice(officeId);
+        return OfficeGetDTO.map(officeEntity);
     }
 
     @GetMapping("/all")

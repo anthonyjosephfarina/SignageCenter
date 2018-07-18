@@ -1,7 +1,7 @@
 package com.guidewire.signagecenter.service;
 
 import com.guidewire.signagecenter.exception.ResourceNotFoundException;
-import com.guidewire.signagecenter.model.db.Office;
+import com.guidewire.signagecenter.model.db.OfficeEntity;
 import com.guidewire.signagecenter.repository.OfficeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,21 +18,21 @@ public class OfficeService {
     @Autowired
     private OfficeRepository officeRepository;
 
-    public Office createOffice(Office office) {
-        return officeRepository.save(office);
+    public OfficeEntity createOffice(OfficeEntity officeEntity) {
+        return officeRepository.save(officeEntity);
     }
 
     public void deleteOffice(Long officeId) {
-        Office office = getOffice(officeId);
-        officeRepository.delete(office);
+        OfficeEntity officeEntity = getOffice(officeId);
+        officeRepository.delete(officeEntity);
     }
 
-    public Office getOffice(Long officeId) {
+    public OfficeEntity getOffice(Long officeId) {
         return officeRepository.findById(officeId).orElseThrow(() ->
-                new ResourceNotFoundException("Office", "id", officeId));
+                new ResourceNotFoundException("OfficeEntity", "id", officeId));
     }
 
-    public List<Office> getAll() {
+    public List<OfficeEntity> getAll() {
         return officeRepository.findAll();
     }
 }

@@ -1,7 +1,7 @@
 package com.guidewire.signagecenter.model.dto.calendar;
 
 import com.guidewire.signagecenter.model.db.calendar.CalendarEventType;
-import com.guidewire.signagecenter.model.db.calendar.InternalCalendarEvent;
+import com.guidewire.signagecenter.model.db.calendar.InternalCalendarEventEntity;
 
 import java.time.Instant;
 
@@ -77,7 +77,7 @@ public class CalendarEventGetDTO {
         this.calendarId = calendarId;
     }
 
-    public static CalendarEventGetDTO map(InternalCalendarEvent event) {
+    public static CalendarEventGetDTO map(InternalCalendarEventEntity event) {
         CalendarEventGetDTO calendarEventGetDTO = new CalendarEventGetDTO();
         calendarEventGetDTO.setId(event.getId());
         calendarEventGetDTO.setName(event.getName());

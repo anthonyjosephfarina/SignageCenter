@@ -5,8 +5,8 @@ import org.hibernate.annotations.NaturalId;
 import javax.persistence.*;
 
 @Entity
-@Table(name="role")
-public class Role {
+@Table(name = "ROLE")
+public class RoleEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,9 +17,10 @@ public class Role {
     @Column(length = 60)
     private RoleName name;
 
-    public Role(){}
+    public RoleEntity() {
+    }
 
-    public Role(RoleName name) {
+    public RoleEntity(RoleName name) {
         this.name = name;
     }
 

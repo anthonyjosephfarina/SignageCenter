@@ -1,6 +1,6 @@
 package com.guidewire.signagecenter.controller;
 
-import com.guidewire.signagecenter.model.db.slide.MapSlide;
+import com.guidewire.signagecenter.model.db.slide.MapSlideEntity;
 import com.guidewire.signagecenter.model.db.slide.SlideType;
 import com.guidewire.signagecenter.model.dto.slide.MapSlideCreateDTO;
 import com.guidewire.signagecenter.model.dto.slide.MapSlideGetDTO;
@@ -26,7 +26,7 @@ public class MapSlideController {
     public MapSlideGetDTO createMapSlide(@RequestBody MapSlideCreateDTO mapSlideCreateDTO) {
 
         // create slide
-        MapSlide mapSlide = new MapSlide();
+        MapSlideEntity mapSlide = new MapSlideEntity();
         mapSlide.setSlideType(SlideType.MAP);
         mapSlide.setName(mapSlideCreateDTO.getName());
         mapSlide.setLatCoord(mapSlideCreateDTO.getLatCoord());

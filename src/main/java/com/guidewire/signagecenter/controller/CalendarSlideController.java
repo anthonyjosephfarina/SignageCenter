@@ -1,6 +1,6 @@
 package com.guidewire.signagecenter.controller;
 
-import com.guidewire.signagecenter.model.db.slide.CalendarSlide;
+import com.guidewire.signagecenter.model.db.slide.CalendarSlideEntity;
 import com.guidewire.signagecenter.model.db.slide.SlideType;
 import com.guidewire.signagecenter.model.dto.slide.CalendarSlideCreateDTO;
 import com.guidewire.signagecenter.model.dto.slide.CalendarSlideGetDTO;
@@ -26,7 +26,7 @@ public class CalendarSlideController {
     public CalendarSlideGetDTO createCalendarSlide(@RequestBody CalendarSlideCreateDTO calendarSlideCreateDTO) {
 
         // create slide
-        CalendarSlide calendarSlide = new CalendarSlide();
+        CalendarSlideEntity calendarSlide = new CalendarSlideEntity();
         calendarSlide.setSlideType(SlideType.CALENDAR);
         calendarSlide.setName(calendarSlideCreateDTO.getName());
         calendarSlide.setDuration(calendarSlideCreateDTO.getDuration());

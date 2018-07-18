@@ -2,8 +2,8 @@ package com.guidewire.signagecenter.model.db.slide;
 
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.guidewire.signagecenter.model.db.Playlist;
-import com.guidewire.signagecenter.model.db.audit.DateAuditable;
+import com.guidewire.signagecenter.model.db.PlaylistEntity;
+import com.guidewire.signagecenter.model.db.audit.DateAuditableEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -11,9 +11,10 @@ import java.io.Serializable;
 import java.time.Instant;
 
 @Entity
+@Table(name = "ABSTRACT_SLIDE")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "slide_type", discriminatorType = DiscriminatorType.STRING)
-public abstract class AbstractSlide extends DateAuditable implements Serializable {
+public abstract class AbstractSlideEntity extends DateAuditableEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +37,7 @@ public abstract class AbstractSlide extends DateAuditable implements Serializabl
 
     @JsonManagedReference
     @ManyToOne
-    private Playlist playlist;
+    private PlaylistEntity playlist;
 
     public Long getId() {
         return id;
@@ -86,11 +87,11 @@ public abstract class AbstractSlide extends DateAuditable implements Serializabl
         this.endDate = endDate;
     }
 
-    public Playlist getPlaylist() {
+    public PlaylistEntity getPlaylist() {
         return playlist;
     }
 
-    public void setPlaylist(Playlist playlist) {
+    public void setPlaylistEntity(PlaylistEntity playlist) {
         this.playlist = playlist;
     }
 }

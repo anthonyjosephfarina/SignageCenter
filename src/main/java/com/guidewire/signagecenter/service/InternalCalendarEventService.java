@@ -1,8 +1,8 @@
 package com.guidewire.signagecenter.service;
 
 import com.guidewire.signagecenter.exception.ResourceNotFoundException;
-import com.guidewire.signagecenter.model.db.calendar.InternalCalendar;
-import com.guidewire.signagecenter.model.db.calendar.InternalCalendarEvent;
+import com.guidewire.signagecenter.model.db.calendar.InternalCalendarEntity;
+import com.guidewire.signagecenter.model.db.calendar.InternalCalendarEventEntity;
 import com.guidewire.signagecenter.repository.InternalCalendarEventRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,21 +20,21 @@ public class InternalCalendarEventService {
     @Autowired
     private InternalCalendarService internalCalendarService;
 
-    public InternalCalendarEvent create(InternalCalendarEvent calendarEvent, Long calendarId) {
+    public InternalCalendarEventEntity create(InternalCalendarEventEntity calendarEvent, Long calendarId) {
 
-        InternalCalendar internalCalendar = internalCalendarService.getCalendar(calendarId);
+        InternalCalendarEntity internalCalendar = internalCalendarService.getCalendar(calendarId);
         calendarEvent.setCalendar(internalCalendar);
 
         return internalCalendarEventRepository.save(calendarEvent);
     }
 
     public void delete(Long calendarEventId) {
-        InternalCalendarEvent calendar = getCalendarEvent(calendarEventId);
+        InternalCalendarEventEntity calendar = getCalendarEvent(calendarEventId);
         internalCalendarEventRepository.delete(calendar);
     }
 
-    public InternalCalendarEvent getCalendarEvent(Long calendarEventId) {
+    public InternalCalendarEventEntity getCalendarEvent(Long calendarEventId) {
         return internalCalendarEventRepository.findById(calendarEventId).orElseThrow(() ->
-                new ResourceNotFoundException("InternalCalendarEvent", "id", calendarEventId));
+                new ResourceNotFoundException("InternalCalendarEventEntity", "id", calendarEventId));
     }
 }

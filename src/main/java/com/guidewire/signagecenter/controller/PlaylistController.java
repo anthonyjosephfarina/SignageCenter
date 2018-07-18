@@ -1,13 +1,13 @@
 package com.guidewire.signagecenter.controller;
 
-import com.guidewire.signagecenter.model.db.Playlist;
-import com.guidewire.signagecenter.model.db.slide.CalendarSlide;
-import com.guidewire.signagecenter.model.db.slide.ImageSlide;
-import com.guidewire.signagecenter.model.db.slide.MapSlide;
-import com.guidewire.signagecenter.model.db.slide.WeatherSlide;
+import com.guidewire.signagecenter.model.db.PlaylistEntity;
+import com.guidewire.signagecenter.model.db.calendar.AbstractCalendarEntity;
+import com.guidewire.signagecenter.model.db.calendar.InternalCalendarEntity;
+import com.guidewire.signagecenter.model.db.slide.*;
 import com.guidewire.signagecenter.model.dto.PlaylistCreateDTO;
 import com.guidewire.signagecenter.model.dto.PlaylistGetDTO;
 import com.guidewire.signagecenter.model.dto.PlaylistPlayDTO;
+import com.guidewire.signagecenter.model.dto.calendar.CalendarEventGetDTO;
 import com.guidewire.signagecenter.model.dto.slide.*;
 import com.guidewire.signagecenter.service.PlaylistService;
 import org.slf4j.Logger;
@@ -17,6 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,13 +34,13 @@ public class PlaylistController {
     @PostMapping
     public PlaylistGetDTO createPlaylist(@RequestBody PlaylistCreateDTO playlistCreateDTO) {
 
-        // create playlist
-        Playlist playlist = new Playlist();
-        playlist.setName(playlistCreateDTO.getName());
-        playlist = playlistService.createPlaylist(playlist, playlistCreateDTO.getOfficeId());
+        // create playlistEntity
+        PlaylistEntity playlistEntity = new PlaylistEntity();
+        playlistEntity.setName(playlistCreateDTO.getName());
+        playlistEntity = playlistService.createPlaylist(playlistEntity, playlistCreateDTO.getOfficeId());
 
-        // convert playlist to dto
-        return PlaylistGetDTO.map(playlist);
+        // convert playlistEntity to dto
+        return PlaylistGetDTO.map(playlistEntity);
     }
 
     @DeleteMapping("/{playlistId}")
@@ -49,8 +51,8 @@ public class PlaylistController {
 
     @GetMapping("/{playlistId}")
     public PlaylistGetDTO getPlaylist(@PathVariable Long playlistId) {
-        Playlist playlist = playlistService.getPlaylist(playlistId);
-        return PlaylistGetDTO.map(playlist);
+        PlaylistEntity playlistEntity = playlistService.getPlaylist(playlistId);
+        return PlaylistGetDTO.map(playlistEntity);
     }
 
     @GetMapping("/all")
@@ -66,30 +68,63 @@ public class PlaylistController {
      */
     @GetMapping("/play/{playlistId}")
     public PlaylistPlayDTO playPlaylist(@PathVariable Long playlistId) {
-        Playlist playlist = playlistService.getPlaylist(playlistId);
 
-        PlaylistPlayDTO playlistPlayDTO = new PlaylistPlayDTO();
-        playlistPlayDTO.setId(playlist.getId());
+        // get main playlist and it's subscribed playlists
+        List<PlaylistEntity> playlistEntities = new ArrayList<>();
+        PlaylistEntity mainPlaylistEntity = playlistService.getPlaylist(playlistId);
+        playlistEntities.add(mainPlaylistEntity);
+        playlistEntities.addAll(mainPlaylistEntity.getSubscribedPlaylists());
 
-        List<AbstractSlideGetDTO> slides = playlist.getSlides().stream().map(slide -> {
+        // gather all of the slides from the playlists
+        List<AbstractSlideEntity> slides = playlistEntities.stream()
+                .map(PlaylistEntity::getSlides)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+
+        // convert to dtos
+        List<AbstractSlideGetDTO> slideDTOs = slides.stream().map(slide -> {
             AbstractSlideGetDTO slideDTO = null;
 
             switch (slide.getSlideType()) {
                 case MAP: {
-                    slideDTO = MapSlideGetDTO.map((MapSlide) slide);
+                    slideDTO = MapSlideGetDTO.map((MapSlideEntity) slide);
                     break;
                 }
                 case CALENDAR: {
-                    CalendarSlide calendarSlide = (CalendarSlide) slide;
-                    slideDTO = CalendarSlideGetDTO.map(calendarSlide);
+                    CalendarSlideEntity calendarSlide = (CalendarSlideEntity) slide;
+
+                    // combine events from the calendars
+                    List<CalendarEventGetDTO> events = new ArrayList<>();
+                    for (AbstractCalendarEntity calendar : calendarSlide.getCalendars()) {
+                        switch (calendar.getType()) {
+                            case INTERNAL: {
+                                InternalCalendarEntity internalCalendarEntity = (InternalCalendarEntity) calendar;
+                                events.addAll(internalCalendarEntity.getEvents().stream().map(CalendarEventGetDTO::map).collect(Collectors.toList()));
+                                break;
+                            }
+                            case OUTLOOK: {
+                                // TODO: implement outlook apis and retrieve events
+                                break;
+                            }
+                            case WORKDAY: {
+                                // TODO: implement workday apis and retrieve events
+                                break;
+                            }
+                            case GMAIL: {
+                                // TODO: implement gmail apis and retrieve events
+                                break;
+                            }
+                        }
+                    }
+                    slideDTO = CalendarSlideGetDTO.map(calendarSlide, events);
                     break;
                 }
                 case IMAGE: {
-                    slideDTO = ImageSlideGetDTO.map((ImageSlide) slide);
+                    slideDTO = ImageSlideGetDTO.map((ImageSlideEntity) slide);
                     break;
                 }
                 case WEATHER: {
-                    slideDTO = WeatherSlideGetDTO.map((WeatherSlide) slide);
+                    slideDTO = WeatherSlideGetDTO.map((WeatherSlideEntity) slide);
                     break;
                 }
             }
@@ -97,8 +132,9 @@ public class PlaylistController {
             return slideDTO;
         }).collect(Collectors.toList());
 
-        playlistPlayDTO.setSlides(slides);
-
+        PlaylistPlayDTO playlistPlayDTO = new PlaylistPlayDTO();
+        playlistPlayDTO.setId(mainPlaylistEntity.getId());
+        playlistPlayDTO.setSlides(slideDTOs);
         return playlistPlayDTO;
     }
 }

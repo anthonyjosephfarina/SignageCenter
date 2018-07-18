@@ -1,6 +1,6 @@
 package com.guidewire.signagecenter.model.dto.slide;
 
-import com.guidewire.signagecenter.model.db.slide.MapSlide;
+import com.guidewire.signagecenter.model.db.slide.MapSlideEntity;
 
 public class MapSlideGetDTO extends AbstractSlideGetDTO {
 
@@ -34,7 +34,7 @@ public class MapSlideGetDTO extends AbstractSlideGetDTO {
         this.address = address;
     }
 
-    public static MapSlideGetDTO map(MapSlide mapSlide) {
+    public static MapSlideGetDTO map(MapSlideEntity mapSlide) {
         MapSlideGetDTO mapSlideGetDTO = new MapSlideGetDTO();
         mapSlideGetDTO.setId(mapSlide.getId());
         mapSlideGetDTO.setName(mapSlide.getName());

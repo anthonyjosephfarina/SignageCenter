@@ -1,6 +1,6 @@
 package com.guidewire.signagecenter.controller;
 
-import com.guidewire.signagecenter.model.db.slide.ImageSlide;
+import com.guidewire.signagecenter.model.db.slide.ImageSlideEntity;
 import com.guidewire.signagecenter.model.db.slide.SlideType;
 import com.guidewire.signagecenter.model.dto.ImageUploadReponse;
 import com.guidewire.signagecenter.model.dto.slide.ImageSlideCreateDTO;
@@ -34,7 +34,7 @@ public class ImageSlideController {
     public ImageSlideGetDTO createImageSlide(@RequestBody ImageSlideCreateDTO imageSlideCreateDTO) {
 
         // create image slide
-        ImageSlide imageSlide = new ImageSlide();
+        ImageSlideEntity imageSlide = new ImageSlideEntity();
         imageSlide.setSlideType(SlideType.IMAGE);
         imageSlide.setName(imageSlideCreateDTO.getName());
         imageSlide.setText(imageSlideCreateDTO.getText());

@@ -1,12 +1,12 @@
 package com.guidewire.signagecenter.repository;
 
-import com.guidewire.signagecenter.model.db.calendar.AbstractCalendar;
+import com.guidewire.signagecenter.model.db.calendar.AbstractCalendarEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface AbstractCalendarRepository extends JpaRepository<AbstractCalendar, Long> {
+public interface AbstractCalendarRepository extends JpaRepository<AbstractCalendarEntity, Long> {
 
-    List<AbstractCalendar> findByOfficeId(Long officeId);
+    List<AbstractCalendarEntity> findByOfficeId(Long officeId);
 
 }

@@ -1,8 +1,8 @@
 package com.guidewire.signagecenter.service;
 
 import com.guidewire.signagecenter.exception.ResourceNotFoundException;
-import com.guidewire.signagecenter.model.db.Playlist;
-import com.guidewire.signagecenter.model.db.slide.ImageSlide;
+import com.guidewire.signagecenter.model.db.PlaylistEntity;
+import com.guidewire.signagecenter.model.db.slide.ImageSlideEntity;
 import com.guidewire.signagecenter.repository.ImageSlideRepository;
 import com.guidewire.signagecenter.service.storage.ImageStorageService;
 import org.slf4j.Logger;
@@ -30,18 +30,18 @@ public class ImageSlideService {
     @Autowired
     private PlaylistService playlistService;
 
-    public ImageSlide createImageSlide(ImageSlide imageSlide, Long playlistId) {
+    public ImageSlideEntity createImageSlide(ImageSlideEntity imageSlide, Long playlistId) {
 
-        Playlist playlist = playlistService.getPlaylist(playlistId);
-        imageSlide.setPlaylist(playlist);
+        PlaylistEntity playlistEntity = playlistService.getPlaylist(playlistId);
+        imageSlide.setPlaylistEntity(playlistEntity);
 
         return imageSlideRepository.save(imageSlide);
     }
 
-    public ImageSlide attachImage(MultipartFile imageFile, Long imageSlideId) {
+    public ImageSlideEntity attachImage(MultipartFile imageFile, Long imageSlideId) {
 
-        ImageSlide imageSlide = imageSlideRepository.findById(imageSlideId).orElseThrow(() ->
-            new ResourceNotFoundException("ImageSlide", "id", imageSlideId));
+        ImageSlideEntity imageSlide = imageSlideRepository.findById(imageSlideId).orElseThrow(() ->
+                new ResourceNotFoundException("ImageSlideEntity", "id", imageSlideId));
 
         Path path = imageStorageService.store(imageFile);
         imageSlide.setImageFilePath(path.getFileName().toString());
@@ -59,7 +59,7 @@ public class ImageSlideService {
         return imageStorageService.loadAsResource(fileName);
     }
 
-    public List<ImageSlide> getAll() {
+    public List<ImageSlideEntity> getAll() {
         return imageSlideRepository.findAll();
     }
 }

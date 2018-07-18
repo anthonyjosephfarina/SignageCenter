@@ -1,6 +1,6 @@
 package com.guidewire.signagecenter.model.dto;
 
-import com.guidewire.signagecenter.model.db.Office;
+import com.guidewire.signagecenter.model.db.OfficeEntity;
 
 import java.time.Instant;
 
@@ -36,11 +36,11 @@ public class OfficeGetDTO {
         this.createdAt = createdAt;
     }
 
-    public static OfficeGetDTO map(Office office) {
+    public static OfficeGetDTO map(OfficeEntity officeEntity) {
         OfficeGetDTO officeGetDTO = new OfficeGetDTO();
-        officeGetDTO.setId(office.getId());
-        officeGetDTO.setName(office.getName());
-        officeGetDTO.setCreatedAt(office.getCreatedAt());
+        officeGetDTO.setId(officeEntity.getId());
+        officeGetDTO.setName(officeEntity.getName());
+        officeGetDTO.setCreatedAt(officeEntity.getCreatedAt());
         return officeGetDTO;
     }
 }

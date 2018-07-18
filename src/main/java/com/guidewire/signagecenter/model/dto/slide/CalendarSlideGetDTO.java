@@ -1,6 +1,6 @@
 package com.guidewire.signagecenter.model.dto.slide;
 
-import com.guidewire.signagecenter.model.db.slide.CalendarSlide;
+import com.guidewire.signagecenter.model.db.slide.CalendarSlideEntity;
 import com.guidewire.signagecenter.model.dto.calendar.CalendarEventGetDTO;
 
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public class CalendarSlideGetDTO extends AbstractSlideGetDTO {
         this.events = events;
     }
 
-    public static CalendarSlideGetDTO map(CalendarSlide calendarSlide) {
+    public static CalendarSlideGetDTO map(CalendarSlideEntity calendarSlide) {
         CalendarSlideGetDTO calendarSlideGetDTO = new CalendarSlideGetDTO();
         calendarSlideGetDTO.setId(calendarSlide.getId());
         calendarSlideGetDTO.setName(calendarSlide.getName());
@@ -26,6 +26,18 @@ public class CalendarSlideGetDTO extends AbstractSlideGetDTO {
         calendarSlideGetDTO.setDuration(calendarSlide.getDuration());
         calendarSlideGetDTO.setStartDate(calendarSlide.getStartDate());
         calendarSlideGetDTO.setEndDate(calendarSlide.getEndDate());
+        return calendarSlideGetDTO;
+    }
+
+    public static CalendarSlideGetDTO map(CalendarSlideEntity calendarSlide, List<CalendarEventGetDTO> events) {
+        CalendarSlideGetDTO calendarSlideGetDTO = new CalendarSlideGetDTO();
+        calendarSlideGetDTO.setId(calendarSlide.getId());
+        calendarSlideGetDTO.setName(calendarSlide.getName());
+        calendarSlideGetDTO.setSlideType(calendarSlide.getSlideType());
+        calendarSlideGetDTO.setDuration(calendarSlide.getDuration());
+        calendarSlideGetDTO.setStartDate(calendarSlide.getStartDate());
+        calendarSlideGetDTO.setEndDate(calendarSlide.getEndDate());
+        calendarSlideGetDTO.setEvents(events);
         return calendarSlideGetDTO;
     }
 }

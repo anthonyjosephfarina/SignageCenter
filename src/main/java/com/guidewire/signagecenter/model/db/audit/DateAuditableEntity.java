@@ -12,7 +12,7 @@ import java.time.Instant;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class DateAuditable implements Serializable {
+public abstract class DateAuditableEntity implements Serializable {
 
     @CreatedDate
     @Column(nullable = false, updatable = false)

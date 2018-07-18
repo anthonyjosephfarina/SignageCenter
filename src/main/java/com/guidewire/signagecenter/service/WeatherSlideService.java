@@ -1,7 +1,7 @@
 package com.guidewire.signagecenter.service;
 
-import com.guidewire.signagecenter.model.db.Playlist;
-import com.guidewire.signagecenter.model.db.slide.WeatherSlide;
+import com.guidewire.signagecenter.model.db.PlaylistEntity;
+import com.guidewire.signagecenter.model.db.slide.WeatherSlideEntity;
 import com.guidewire.signagecenter.repository.WeatherSlideRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,15 +21,15 @@ public class WeatherSlideService {
     @Autowired
     private PlaylistService playlistService;
 
-    public WeatherSlide createWeatherSlide(WeatherSlide weatherSlide, Long playlistId) {
+    public WeatherSlideEntity createWeatherSlide(WeatherSlideEntity weatherSlide, Long playlistId) {
 
-        Playlist playlist = playlistService.getPlaylist(playlistId);
-        weatherSlide.setPlaylist(playlist);
+        PlaylistEntity playlistEntity = playlistService.getPlaylist(playlistId);
+        weatherSlide.setPlaylistEntity(playlistEntity);
 
         return weatherSlideRepository.save(weatherSlide);
     }
 
-    public List<WeatherSlide> getAll() {
+    public List<WeatherSlideEntity> getAll() {
         return weatherSlideRepository.findAll();
     }
 }

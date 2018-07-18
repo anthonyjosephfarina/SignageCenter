@@ -1,6 +1,6 @@
 package com.guidewire.signagecenter.model.dto.calendar;
 
-import com.guidewire.signagecenter.model.db.calendar.InternalCalendar;
+import com.guidewire.signagecenter.model.db.calendar.InternalCalendarEntity;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,12 +8,12 @@ import java.util.stream.Collectors;
 public class InternalCalendarGetDTO extends AbstractCalendarGetDTO {
 
     /**
-     * Map InternalCalendar to InternalCalendarGetDTO
+     * Map InternalCalendarEntity to InternalCalendarGetDTO
      *
-     * @param cal (InternalCalendar)
+     * @param cal (InternalCalendarEntity)
      * @return InternalCalendarGetDTO
      */
-    public static InternalCalendarGetDTO map(InternalCalendar cal) {
+    public static InternalCalendarGetDTO map(InternalCalendarEntity cal) {
         InternalCalendarGetDTO internalCalendarGetDTO = new InternalCalendarGetDTO();
         internalCalendarGetDTO.setId(cal.getId());
         internalCalendarGetDTO.setName(cal.getName());

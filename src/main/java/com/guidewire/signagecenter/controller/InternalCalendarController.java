@@ -1,7 +1,7 @@
 package com.guidewire.signagecenter.controller;
 
 import com.guidewire.signagecenter.model.db.calendar.CalendarType;
-import com.guidewire.signagecenter.model.db.calendar.InternalCalendar;
+import com.guidewire.signagecenter.model.db.calendar.InternalCalendarEntity;
 import com.guidewire.signagecenter.model.dto.calendar.InternalCalendarCreateDTO;
 import com.guidewire.signagecenter.model.dto.calendar.InternalCalendarGetDTO;
 import com.guidewire.signagecenter.service.InternalCalendarService;
@@ -33,7 +33,7 @@ public class InternalCalendarController {
     public InternalCalendarGetDTO createInternalCalendar(@RequestBody InternalCalendarCreateDTO internalCalendarCreateDTO) {
 
         // create image slide
-        InternalCalendar internalCalendar = new InternalCalendar();
+        InternalCalendarEntity internalCalendar = new InternalCalendarEntity();
         internalCalendar.setType(CalendarType.INTERNAL);
         internalCalendar.setName(internalCalendarCreateDTO.getName());
         internalCalendar.setDescription(internalCalendarCreateDTO.getDescription());

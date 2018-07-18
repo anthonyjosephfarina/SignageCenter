@@ -11,17 +11,17 @@ import java.util.List;
 
 @Entity
 @DiscriminatorValue(value = CalendarType.Values.INTERNAL)
-public class InternalCalendar extends AbstractCalendar {
+public class InternalCalendarEntity extends AbstractCalendarEntity {
 
     @JsonBackReference
     @OneToMany(mappedBy = "calendar", fetch = FetchType.LAZY)
-    private List<InternalCalendarEvent> events = new ArrayList<>();
+    private List<InternalCalendarEventEntity> events = new ArrayList<>();
 
-    public List<InternalCalendarEvent> getEvents() {
+    public List<InternalCalendarEventEntity> getEvents() {
         return events;
     }
 
-    public void setEvents(List<InternalCalendarEvent> events) {
+    public void setEvents(List<InternalCalendarEventEntity> events) {
         this.events = events;
     }
 }

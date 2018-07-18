@@ -1,7 +1,7 @@
 package com.guidewire.signagecenter.service;
 
 import com.guidewire.signagecenter.exception.ResourceNotFoundException;
-import com.guidewire.signagecenter.model.db.calendar.AbstractCalendar;
+import com.guidewire.signagecenter.model.db.calendar.AbstractCalendarEntity;
 import com.guidewire.signagecenter.repository.AbstractCalendarRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,21 +18,21 @@ public class AbstractCalendarService {
     @Autowired
     private AbstractCalendarRepository abstractCalendarRepository;
 
-    public AbstractCalendar getCalendar(Long calendarId) {
+    public AbstractCalendarEntity getCalendar(Long calendarId) {
         return abstractCalendarRepository.findById(calendarId).orElseThrow(() ->
-                new ResourceNotFoundException("AbstractCalendar", "id", calendarId));
+                new ResourceNotFoundException("AbstractCalendarEntity", "id", calendarId));
     }
 
-    public List<AbstractCalendar> getAll() {
+    public List<AbstractCalendarEntity> getAll() {
         return abstractCalendarRepository.findAll();
     }
 
-    public List<AbstractCalendar> getAllByOffice(Long officeId) {
+    public List<AbstractCalendarEntity> getAllByOffice(Long officeId) {
         return abstractCalendarRepository.findByOfficeId(officeId);
     }
 
     public void deleteCalendar(Long calendarId) {
-        AbstractCalendar calendar = getCalendar(calendarId);
+        AbstractCalendarEntity calendar = getCalendar(calendarId);
         abstractCalendarRepository.delete(calendar);
     }
 }

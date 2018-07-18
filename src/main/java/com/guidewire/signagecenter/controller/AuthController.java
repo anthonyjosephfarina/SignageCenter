@@ -1,8 +1,8 @@
 package com.guidewire.signagecenter.controller;
 
-import com.guidewire.signagecenter.model.db.Role;
+import com.guidewire.signagecenter.model.db.RoleEntity;
 import com.guidewire.signagecenter.model.db.RoleName;
-import com.guidewire.signagecenter.model.db.User;
+import com.guidewire.signagecenter.model.db.UserEntity;
 import com.guidewire.signagecenter.model.dto.ApiResponse;
 import com.guidewire.signagecenter.model.dto.JwtAuthenticationResponse;
 import com.guidewire.signagecenter.model.dto.LoginRequest;
@@ -73,27 +73,27 @@ public class AuthController {
                     HttpStatus.BAD_REQUEST);
         }
 
-        // Creating user's account
-        User user = new User(signUpRequest.getName(), signUpRequest.getUsername(),
+        // Creating userEntity's account
+        UserEntity userEntity = new UserEntity(signUpRequest.getName(), signUpRequest.getUsername(),
                 signUpRequest.getPassword());
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
 
-       // Role userRole = new Role(RoleName.ROLE_USER);
+        // RoleEntity userRole = new RoleEntity(RoleName.ROLE_USER);
       //  userRole.setId(new Long(1));
 
-        Optional<Role> userRole = roleRepository.findByName(RoleName.ROLE_USER);
-                //.orElseThrow(() -> new AppException("User Role not set."));
+        Optional<RoleEntity> userRole = roleRepository.findByName(RoleName.ROLE_USER);
+        //.orElseThrow(() -> new AppException("UserEntity RoleEntity not set."));
 
-        user.setRoles(Collections.singleton(userRole.get()));
+        userEntity.setRoles(Collections.singleton(userRole.get()));
 
-        User result = userRepository.save(user);
+        UserEntity result = userRepository.save(userEntity);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/users/{username}")
                 .buildAndExpand(result.getUsername()).toUri();
 
-        return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
+        return ResponseEntity.created(location).body(new ApiResponse(true, "UserEntity registered successfully"));
     }
 
 }

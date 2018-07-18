@@ -1,6 +1,6 @@
 package com.guidewire.signagecenter.controller;
 
-import com.guidewire.signagecenter.model.db.calendar.InternalCalendarEvent;
+import com.guidewire.signagecenter.model.db.calendar.InternalCalendarEventEntity;
 import com.guidewire.signagecenter.model.dto.calendar.CalendarEventGetDTO;
 import com.guidewire.signagecenter.model.dto.calendar.InternalCalendarEventCreateDTO;
 import com.guidewire.signagecenter.service.InternalCalendarEventService;
@@ -24,15 +24,15 @@ public class InternalCalendarEventController {
     public CalendarEventGetDTO create(@RequestBody InternalCalendarEventCreateDTO internalCalendarEventCreateDTO) {
 
         // create internal calendar event
-        InternalCalendarEvent internalCalendarEvent = new InternalCalendarEvent();
-        internalCalendarEvent.setName(internalCalendarEventCreateDTO.getName());
-        internalCalendarEvent.setDescription(internalCalendarEventCreateDTO.getDescription());
-        internalCalendarEvent.setType(internalCalendarEventCreateDTO.getType());
-        internalCalendarEvent.setDate(internalCalendarEventCreateDTO.getDate());
-        internalCalendarEvent.setAllDay(internalCalendarEventCreateDTO.isAllDay());
-        internalCalendarEvent = internalCalendarEventService.create(internalCalendarEvent, internalCalendarEventCreateDTO.getCalendarId());
+        InternalCalendarEventEntity internalCalendarEventEntity = new InternalCalendarEventEntity();
+        internalCalendarEventEntity.setName(internalCalendarEventCreateDTO.getName());
+        internalCalendarEventEntity.setDescription(internalCalendarEventCreateDTO.getDescription());
+        internalCalendarEventEntity.setType(internalCalendarEventCreateDTO.getType());
+        internalCalendarEventEntity.setDate(internalCalendarEventCreateDTO.getDate());
+        internalCalendarEventEntity.setAllDay(internalCalendarEventCreateDTO.isAllDay());
+        internalCalendarEventEntity = internalCalendarEventService.create(internalCalendarEventEntity, internalCalendarEventCreateDTO.getCalendarId());
 
-        return CalendarEventGetDTO.map(internalCalendarEvent);
+        return CalendarEventGetDTO.map(internalCalendarEventEntity);
     }
 
     @DeleteMapping("/{calendarEventId}")

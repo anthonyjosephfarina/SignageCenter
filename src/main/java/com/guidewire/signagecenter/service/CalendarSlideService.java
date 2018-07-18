@@ -1,8 +1,8 @@
 package com.guidewire.signagecenter.service;
 
-import com.guidewire.signagecenter.model.db.Playlist;
-import com.guidewire.signagecenter.model.db.calendar.AbstractCalendar;
-import com.guidewire.signagecenter.model.db.slide.CalendarSlide;
+import com.guidewire.signagecenter.model.db.PlaylistEntity;
+import com.guidewire.signagecenter.model.db.calendar.AbstractCalendarEntity;
+import com.guidewire.signagecenter.model.db.slide.CalendarSlideEntity;
 import com.guidewire.signagecenter.repository.CalendarSlideRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,19 +26,19 @@ public class CalendarSlideService {
     @Autowired
     private AbstractCalendarService abstractCalendarService;
 
-    public CalendarSlide createCalendarSlide(CalendarSlide calendarSlide, Long playlistId, List<Long> calendarIds) {
+    public CalendarSlideEntity createCalendarSlide(CalendarSlideEntity calendarSlide, Long playlistId, List<Long> calendarIds) {
 
-        Playlist playlist = playlistService.getPlaylist(playlistId);
-        calendarSlide.setPlaylist(playlist);
+        PlaylistEntity playlistEntity = playlistService.getPlaylist(playlistId);
+        calendarSlide.setPlaylistEntity(playlistEntity);
 
-        List<AbstractCalendar> calendars = calendarIds.stream()
+        List<AbstractCalendarEntity> calendars = calendarIds.stream()
                 .map(id -> abstractCalendarService.getCalendar(id)).collect(Collectors.toList());
         calendarSlide.setCalendars(calendars);
 
         return calendarSlideRepository.save(calendarSlide);
     }
 
-    public List<CalendarSlide> getAll() {
+    public List<CalendarSlideEntity> getAll() {
         return calendarSlideRepository.findAll();
     }
 }

@@ -1,6 +1,6 @@
 package com.guidewire.signagecenter.controller;
 
-import com.guidewire.signagecenter.model.db.slide.AbstractSlide;
+import com.guidewire.signagecenter.model.db.slide.AbstractSlideEntity;
 import com.guidewire.signagecenter.service.AbstractSlideService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,12 +21,12 @@ public class AbstractSlideController {
     private AbstractSlideService abstractSlideService;
 
     @GetMapping("/playlist/{playlistId}")
-    public List<AbstractSlide> getAllByPlaylist(@PathVariable Long playlistId) {
+    public List<AbstractSlideEntity> getAllByPlaylist(@PathVariable Long playlistId) {
         return abstractSlideService.getAllByPlaylist(playlistId);
     }
 
     @GetMapping("/all")
-    public List<AbstractSlide> getAllAbstractSlides() {
+    public List<AbstractSlideEntity> getAllAbstractSlides() {
         return abstractSlideService.getAll();
     }
 

@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @DiscriminatorValue(value = SlideType.Values.WEATHER)
-public class WeatherSlide extends AbstractSlide {
+public class WeatherSlideEntity extends AbstractSlideEntity {
 
     @NotNull
     private Long cityId;
