@@ -12,7 +12,9 @@ public class WeatherSlideCreateDTO {
 
     private Instant endDate;
 
-    private Long cityId;
+    private Double latCoord;
+
+    private Double longCoord;
 
     private Long playlistId;
 
@@ -48,12 +50,20 @@ public class WeatherSlideCreateDTO {
         this.endDate = endDate;
     }
 
-    public Long getCityId() {
-        return cityId;
+    public Double getLatCoord() {
+        return latCoord;
     }
 
-    public void setCityId(Long cityId) {
-        this.cityId = cityId;
+    public void setLatCoord(Double latCoord) {
+        this.latCoord = latCoord;
+    }
+
+    public Double getLongCoord() {
+        return longCoord;
+    }
+
+    public void setLongCoord(Double longCoord) {
+        this.longCoord = longCoord;
     }
 
     public Long getPlaylistId() {

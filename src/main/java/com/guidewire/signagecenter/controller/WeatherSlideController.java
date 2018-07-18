@@ -32,7 +32,8 @@ public class WeatherSlideController {
         weatherSlide.setDuration(weatherSlideCreateDTO.getDuration());
         weatherSlide.setStartDate(weatherSlideCreateDTO.getStartDate());
         weatherSlide.setEndDate(weatherSlideCreateDTO.getEndDate());
-        weatherSlide.setCityId(weatherSlideCreateDTO.getCityId());
+        weatherSlide.setLatCoord(weatherSlideCreateDTO.getLatCoord());
+        weatherSlide.setLongCoord(weatherSlideCreateDTO.getLongCoord());
         weatherSlide = weatherSlideService.createWeatherSlide(weatherSlide, weatherSlideCreateDTO.getPlaylistId());
 
         // convert to dto
