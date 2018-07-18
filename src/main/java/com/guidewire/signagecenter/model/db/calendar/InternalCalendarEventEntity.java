@@ -9,6 +9,7 @@ import javax.validation.constraints.Size;
 import java.time.Instant;
 
 @Entity
+@Table(name = "INTERNAL_CALENDAR_EVENT")
 public class InternalCalendarEventEntity extends DateAuditableEntity {
 
     @Id
