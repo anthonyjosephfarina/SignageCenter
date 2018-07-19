@@ -42,6 +42,17 @@ public class PlaylistService {
         return playlistRepository.save(playlistEntity);
     }
 
+    public PlaylistEntity unsubscribe(Long playlistId, Long playlistSubscriptionId) {
+        PlaylistEntity playlistEntity = getPlaylist(playlistId);
+
+        List<PlaylistEntity> updatedSubscribedPlaylists = playlistEntity.getSubscribedPlaylists().stream()
+                .filter(ply -> !ply.getId().equals(playlistSubscriptionId))
+                .collect(Collectors.toList());
+        playlistEntity.setSubscribedPlaylistEntities(updatedSubscribedPlaylists);
+
+        return playlistRepository.save(playlistEntity);
+    }
+
     public PlaylistEntity getPlaylist(Long playlistId) {
         return playlistRepository.findById(playlistId).orElseThrow(() ->
                 new ResourceNotFoundException("PlaylistEntity", "id", playlistId));
