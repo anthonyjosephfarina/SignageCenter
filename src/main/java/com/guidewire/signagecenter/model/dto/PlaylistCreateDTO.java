@@ -3,6 +3,11 @@ package com.guidewire.signagecenter.model.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * DTO for PlaylistCreate .
+ *
+ * @author
+ */
 public class PlaylistCreateDTO {
 
     private Long officeId;

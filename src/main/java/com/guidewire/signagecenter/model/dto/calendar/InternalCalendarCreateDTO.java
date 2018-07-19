@@ -1,5 +1,9 @@
 package com.guidewire.signagecenter.model.dto.calendar;
-
+/**
+ * DTO for InternalCalendar .
+ *
+ * @author
+ */
 public class InternalCalendarCreateDTO {
 
     private String name;

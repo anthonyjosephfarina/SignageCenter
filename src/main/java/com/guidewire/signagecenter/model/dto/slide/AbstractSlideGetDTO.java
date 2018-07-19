@@ -3,7 +3,11 @@ package com.guidewire.signagecenter.model.dto.slide;
 import com.guidewire.signagecenter.model.db.slide.SlideType;
 
 import java.time.Instant;
-
+/**
+ * DTO for AbstractSlideGet.
+ *
+ * @author
+ */
 public abstract class AbstractSlideGetDTO {
 
     private Long id;

@@ -4,7 +4,11 @@ import com.guidewire.signagecenter.model.db.calendar.InternalCalendarEntity;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
+/**
+ * DTO for InternalCalendar .
+ *
+ * @author
+ */
 public class InternalCalendarGetDTO extends AbstractCalendarGetDTO {
 
     /**

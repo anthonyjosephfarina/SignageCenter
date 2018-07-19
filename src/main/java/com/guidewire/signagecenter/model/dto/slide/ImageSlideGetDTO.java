@@ -1,7 +1,11 @@
 package com.guidewire.signagecenter.model.dto.slide;
 
 import com.guidewire.signagecenter.model.db.slide.ImageSlideEntity;
-
+/**
+ * DTO for ImageSlideGet.
+ *
+ * @author
+ */
 public class ImageSlideGetDTO extends AbstractSlideGetDTO {
 
     private String text;

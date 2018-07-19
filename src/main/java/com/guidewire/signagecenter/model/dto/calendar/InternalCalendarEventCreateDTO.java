@@ -3,7 +3,11 @@ package com.guidewire.signagecenter.model.dto.calendar;
 import com.guidewire.signagecenter.model.db.calendar.CalendarEventType;
 
 import java.time.Instant;
-
+/**
+ * DTO for InternalCalendar .
+ *
+ * @author
+ */
 public class InternalCalendarEventCreateDTO {
 
     private String name;
