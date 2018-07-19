@@ -23,6 +23,8 @@ public class PlaylistGetDTO {
 
     private List<AbstractSlideGetDTO> slides = new ArrayList<>();
 
+    private List<PlaylistGetDTO> subscribedPlaylists = new ArrayList<>();
+
     private Instant createdAt;
 
     public Long getId() {
@@ -63,6 +65,14 @@ public class PlaylistGetDTO {
 
     public void setSlides(List<AbstractSlideGetDTO> slides) {
         this.slides = slides;
+    }
+
+    public List<PlaylistGetDTO> getSubscribedPlaylists() {
+        return subscribedPlaylists;
+    }
+
+    public void setSubscribedPlaylists(List<PlaylistGetDTO> subscribedPlaylists) {
+        this.subscribedPlaylists = subscribedPlaylists;
     }
 
     public Instant getCreatedAt() {

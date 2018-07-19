@@ -39,19 +39,37 @@ public class PlaylistService {
      */
     @Autowired
     private OfficeRepository officeRepository;
-
+  
     /**
      * Creates the PlaylistEntity .
      * @param playlistEntity <code>PlaylistEntity</code>.
      * @param officeId <code>Long</code>.
+     * @param subscribedPlaylistIds <code>List<Long></code>
      * @return PlaylistEntity.
      * @throws ResourceNotFoundException
      */
-    public PlaylistEntity createPlaylist(PlaylistEntity playlistEntity, Long officeId) {
-        logger.info("creating Playlist with %d ",officeId);
+    public PlaylistEntity createPlaylist(PlaylistEntity playlistEntity, Long officeId, List<Long> subscribedPlaylistIds) {
+
         OfficeEntity officeEntity = officeRepository.findById(officeId).orElseThrow(() ->
                 new ResourceNotFoundException("OfficeEntity", "id", officeId));
         playlistEntity.setOffice(officeEntity);
+
+        List<PlaylistEntity> subscribedPlaylists = subscribedPlaylistIds.stream()
+                .map(id -> getPlaylist(id))
+                .collect(Collectors.toList());
+        playlistEntity.setSubscribedPlaylistEntities(subscribedPlaylists);
+
+        return playlistRepository.save(playlistEntity);
+    }
+
+    public PlaylistEntity unsubscribe(Long playlistId, Long playlistSubscriptionId) {
+        PlaylistEntity playlistEntity = getPlaylist(playlistId);
+
+        List<PlaylistEntity> updatedSubscribedPlaylists = playlistEntity.getSubscribedPlaylists().stream()
+                .filter(ply -> !ply.getId().equals(playlistSubscriptionId))
+                .collect(Collectors.toList());
+        playlistEntity.setSubscribedPlaylistEntities(updatedSubscribedPlaylists);
+      
         return playlistRepository.save(playlistEntity);
     }
 
