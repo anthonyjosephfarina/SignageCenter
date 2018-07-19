@@ -1,7 +1,6 @@
 package com.guidewire.signagecenter.service;
 
 import com.guidewire.signagecenter.exception.ResourceNotFoundException;
-import com.guidewire.signagecenter.model.db.PlaylistEntity;
 import com.guidewire.signagecenter.model.db.slide.AbstractSlideEntity;
 import com.guidewire.signagecenter.repository.AbstractSlideRepository;
 import org.slf4j.Logger;
@@ -9,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 /**
  * AbstractSlideService
@@ -28,12 +28,6 @@ public class AbstractSlideService {
      */
     @Autowired
     private AbstractSlideRepository abstractSlideRepository;
-
-    /**
-     *  Inject PlaylistService.
-     */
-    @Autowired
-    private PlaylistService playlistService;
 
     /**
      * Retrieve the AbstractSlideEntity .
@@ -62,8 +56,18 @@ public class AbstractSlideService {
      * @throws
      */
     public List<AbstractSlideEntity> getAllByPlaylist(Long playlistId) {
-        PlaylistEntity playlistEntity = playlistService.getPlaylist(playlistId);
-        return playlistEntity.getSlides();
+        return abstractSlideRepository.findByPlaylistId(playlistId);
+    }
+
+    /**
+     * Retrieve the AbstractSlideEntity  .
+     *
+     * @param playlistId <code>Long</code>.
+     * @return AbstractSlideEntity.
+     * @throws
+     */
+    public List<AbstractSlideEntity> getAllActiveByPlaylist(Long playlistId) {
+        return abstractSlideRepository.findByPlaylistIdAndDate(playlistId, Instant.now());
     }
 
     /**

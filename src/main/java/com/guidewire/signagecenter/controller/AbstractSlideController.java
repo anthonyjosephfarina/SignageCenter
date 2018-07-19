@@ -27,7 +27,15 @@ public class AbstractSlideController {
     private AbstractSlideGetMapper slideGetMapper;
 
     @GetMapping("/playlist/{playlistId}")
-    public List<AbstractSlideGetDTO> getAllByPlaylist(@PathVariable Long playlistId) {
+    public List<AbstractSlideGetDTO> getAllByPlaylist(@PathVariable Long playlistId,
+                                                      @RequestParam(required = false, defaultValue = "false") Boolean activeOnly) {
+
+        if (activeOnly) {
+            return abstractSlideService.getAllActiveByPlaylist(playlistId).stream()
+                    .map(slideGetMapper::mapToDTO)
+                    .collect(Collectors.toList());
+        }
+
         return abstractSlideService.getAllByPlaylist(playlistId).stream()
                 .map(slideGetMapper::mapToDTO)
                 .collect(Collectors.toList());

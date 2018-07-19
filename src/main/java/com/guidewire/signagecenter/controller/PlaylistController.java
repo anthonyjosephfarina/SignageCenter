@@ -7,6 +7,7 @@ import com.guidewire.signagecenter.model.dto.PlaylistCreateDTO;
 import com.guidewire.signagecenter.model.dto.PlaylistGetDTO;
 import com.guidewire.signagecenter.model.dto.PlaylistPlayDTO;
 import com.guidewire.signagecenter.model.dto.slide.AbstractSlideGetDTO;
+import com.guidewire.signagecenter.service.AbstractSlideService;
 import com.guidewire.signagecenter.service.PlaylistService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,9 @@ public class PlaylistController {
 
     @Autowired
     private PlaylistService playlistService;
+
+    @Autowired
+    private AbstractSlideService abstractSlideService;
 
     @Autowired
     private AbstractSlideGetMapper slideGetMapper;
@@ -103,9 +107,9 @@ public class PlaylistController {
         playlistEntities.add(mainPlaylistEntity);
         playlistEntities.addAll(mainPlaylistEntity.getSubscribedPlaylists());
 
-        // gather all of the slides from the playlists
+        // gather all of the active slides from the playlists
         List<AbstractSlideEntity> slides = playlistEntities.stream()
-                .map(PlaylistEntity::getSlides)
+                .map(ply -> abstractSlideService.getAllActiveByPlaylist(ply.getId()))
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
 
