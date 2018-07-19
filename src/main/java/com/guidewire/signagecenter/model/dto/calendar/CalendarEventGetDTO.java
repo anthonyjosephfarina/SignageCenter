@@ -4,7 +4,11 @@ import com.guidewire.signagecenter.model.db.calendar.CalendarEventType;
 import com.guidewire.signagecenter.model.db.calendar.InternalCalendarEventEntity;
 
 import java.time.Instant;
-
+/**
+ * DTO for CalendarEvent .
+ *
+ * @author
+ */
 public class CalendarEventGetDTO {
 
     private Long id;

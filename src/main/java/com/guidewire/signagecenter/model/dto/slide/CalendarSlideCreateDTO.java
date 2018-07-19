@@ -3,7 +3,11 @@ package com.guidewire.signagecenter.model.dto.slide;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * DTO for CalendarSlideCreate.
+ *
+ * @author
+ */
 public class CalendarSlideCreateDTO {
 
     private String name;

@@ -5,7 +5,11 @@ import com.guidewire.signagecenter.model.dto.calendar.CalendarEventGetDTO;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * DTO for CalendarSlideGet.
+ *
+ * @author
+ */
 public class CalendarSlideGetDTO extends AbstractSlideGetDTO {
 
     private List<CalendarEventGetDTO> events = new ArrayList<>();

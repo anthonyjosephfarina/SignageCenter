@@ -11,46 +11,87 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * PlaylistService retrieves the saved Playlist details and save the newly created Playlists
+ * @author
+ */
 @Service
 public class PlaylistService {
 
+    /**
+     * The Logger for PlaylistService.
+     */
     private static final Logger logger = LoggerFactory.getLogger(PlaylistService.class);
 
+    /**
+     *  Inject PlaylistRepository.
+     */
     @Autowired
     private PlaylistRepository playlistRepository;
 
+    /**
+     *  Inject OfficeRepository.
+     */
     @Autowired
     private OfficeRepository officeRepository;
 
+    /**
+     * Creates the PlaylistEntity .
+     * @param playlistEntity <code>PlaylistEntity</code>.
+     * @param officeId <code>Long</code>.
+     * @return PlaylistEntity.
+     * @throws ResourceNotFoundException
+     */
     public PlaylistEntity createPlaylist(PlaylistEntity playlistEntity, Long officeId) {
-
+        logger.info("creating Playlist with %d ",officeId);
         OfficeEntity officeEntity = officeRepository.findById(officeId).orElseThrow(() ->
                 new ResourceNotFoundException("OfficeEntity", "id", officeId));
         playlistEntity.setOffice(officeEntity);
-
         return playlistRepository.save(playlistEntity);
     }
 
+    /**
+     * Retrieve the PlaylistEntity .
+     * @param playlistId <code>Long</code>.
+     * @return PlaylistEntity.
+     * @throws ResourceNotFoundException
+     */
     public PlaylistEntity getPlaylist(Long playlistId) {
         return playlistRepository.findById(playlistId).orElseThrow(() ->
                 new ResourceNotFoundException("PlaylistEntity", "id", playlistId));
     }
 
+
+    /**
+     * Retrieves all  values from the  PlaylistEntity  in database.
+     *  @return List<PlaylistEntity> .
+     *  @throws
+     */
     public List<PlaylistEntity> getAll() {
         return playlistRepository.findAll();
     }
 
+    /**
+     * Deletes the playlistEntity value matching playlistId.
+     * @param playlistId <code>Long</code>.
+     * @throws
+     */
     public void deletePlaylist(Long playlistId) {
         PlaylistEntity playlistEntity = getPlaylist(playlistId);
         playlistRepository.delete(playlistEntity);
     }
 
+    /**
+     * Retrieve the PlaylistPlayDTO Object.
+     * @param playlistId <code>Long</code>.
+     * @return PlaylistPlayDTO.
+     * @throws
+     */
     public PlaylistPlayDTO play(Long playlistId) {
 
         // get the main playlist and it's subscribed playlistEntities

@@ -1,7 +1,11 @@
 package com.guidewire.signagecenter.model.dto.slide;
 
 import java.time.Instant;
-
+/**
+ * DTO for WeatherSlideCreate .
+ *
+ * @author
+ */
 public class WeatherSlideCreateDTO {
 
     private String name;

@@ -11,21 +11,44 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
+/**
+ * CalendarSlideService
+ * @author
+ */
 @Service
 public class CalendarSlideService {
 
+    /**
+     * The Logger for CalendarSlideService.
+     */
     private static final Logger logger = LoggerFactory.getLogger(CalendarSlideService.class);
 
+    /**
+     *  Inject CalendarSlideRepository.
+     */
     @Autowired
     private CalendarSlideRepository calendarSlideRepository;
 
+    /**
+     *  Inject PlaylistService.
+     */
     @Autowired
     private PlaylistService playlistService;
 
+    /**
+     *  Inject AbstractCalendarService.
+     */
     @Autowired
     private AbstractCalendarService abstractCalendarService;
 
+    /**
+     * Creates the CalendarSlideEntity .
+     * @param calendarSlide <code>CalendarSlideEntity</code>.
+     * @param playlistId <code>Long</code>.
+     * @param calendarIds <code>Long</code>.
+     * @return CalendarSlideEntity.
+     * @throws
+     */
     public CalendarSlideEntity createCalendarSlide(CalendarSlideEntity calendarSlide, Long playlistId, List<Long> calendarIds) {
 
         PlaylistEntity playlistEntity = playlistService.getPlaylist(playlistId);
@@ -38,6 +61,11 @@ public class CalendarSlideService {
         return calendarSlideRepository.save(calendarSlide);
     }
 
+    /**
+     * Retrieves all  values from the  CalendarSlideEntity  in database.
+     *  @return List<CalendarSlideEntity> .
+     *  @throws
+     */
     public List<CalendarSlideEntity> getAll() {
         return calendarSlideRepository.findAll();
     }

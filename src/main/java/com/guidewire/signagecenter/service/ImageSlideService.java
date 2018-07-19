@@ -15,21 +15,42 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.nio.file.Path;
 import java.util.List;
-
+/**
+ * ImageSlideService
+ * @author
+ */
 @Service
 public class ImageSlideService {
-
+    /**
+     * The Logger for ImageSlideService.
+     */
     private static final Logger logger = LoggerFactory.getLogger(ImageSlideService.class);
 
+    /**
+     *  Inject ImageSlideRepository.
+     */
     @Autowired
     private ImageSlideRepository imageSlideRepository;
 
+    /**
+     *  Inject ImageStorageService.
+     */
     @Autowired
     private ImageStorageService imageStorageService;
 
+    /**
+     *  Inject PlaylistService.
+     */
     @Autowired
     private PlaylistService playlistService;
 
+    /**
+     * Creates the ImageSlideEntity .
+     * @param imageSlide <code>ImageSlideEntity</code>.
+     * @param playlistId <code>Long</code>.
+     * @return ImageSlideEntity.
+     * @throws
+     */
     public ImageSlideEntity createImageSlide(ImageSlideEntity imageSlide, Long playlistId) {
 
         PlaylistEntity playlistEntity = playlistService.getPlaylist(playlistId);
@@ -38,6 +59,13 @@ public class ImageSlideService {
         return imageSlideRepository.save(imageSlide);
     }
 
+    /**
+     * Attaches the Image .
+     * @param imageFile <code>MultipartFile</code>.
+     * @param imageSlideId <code>Long</code>.
+     * @return ImageSlideEntity.
+     * @throws ResourceNotFoundException
+     */
     public ImageSlideEntity attachImage(MultipartFile imageFile, Long imageSlideId) {
 
         ImageSlideEntity imageSlide = imageSlideRepository.findById(imageSlideId).orElseThrow(() ->
@@ -55,10 +83,21 @@ public class ImageSlideService {
         return imageSlideRepository.save(imageSlide);
     }
 
+    /**
+     *  Load Resource
+     * @param fileName <code>String</code>.
+     * @return Resource.
+     * @throws
+     */
     public Resource loadImage(String fileName) {
         return imageStorageService.loadAsResource(fileName);
     }
 
+    /**
+     * Retrieves all  values from the  ImageSlideEntity  in database.
+     *  @return List<ImageSlideEntity> .
+     *  @throws
+     */
     public List<ImageSlideEntity> getAll() {
         return imageSlideRepository.findAll();
     }

@@ -1,7 +1,11 @@
 package com.guidewire.signagecenter.model.dto.slide;
 
 import java.time.Instant;
-
+/**
+ * DTO for MapSlideCreate.
+ *
+ * @author
+ */
 public class MapSlideCreateDTO {
 
     private String name;

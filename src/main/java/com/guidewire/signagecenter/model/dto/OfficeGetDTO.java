@@ -3,7 +3,11 @@ package com.guidewire.signagecenter.model.dto;
 import com.guidewire.signagecenter.model.db.OfficeEntity;
 
 import java.time.Instant;
-
+/**
+ * DTO for OfficeGet .
+ *
+ * @author
+ */
 public class OfficeGetDTO {
 
     private Long id;

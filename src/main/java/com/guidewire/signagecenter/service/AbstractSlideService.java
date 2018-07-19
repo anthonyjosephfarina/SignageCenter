@@ -10,32 +10,67 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+/**
+ * AbstractSlideService
+ * @author
+ */
 @Service
 public class AbstractSlideService {
 
+    /**
+     * The Logger for AbstractSlideService.
+     */
     private static final Logger logger = LoggerFactory.getLogger(AbstractSlideService.class);
 
+
+    /**
+     *  Inject AbstractSlideRepository.
+     */
     @Autowired
     private AbstractSlideRepository abstractSlideRepository;
 
+    /**
+     *  Inject PlaylistService.
+     */
     @Autowired
     private PlaylistService playlistService;
 
+    /**
+     * Retrieve the AbstractSlideEntity .
+     * @param slideId <code>Long</code>.
+     * @return AbstractSlideEntity.
+     * @throws
+     */
     public AbstractSlideEntity getSlide(Long slideId) {
         return abstractSlideRepository.findById(slideId).orElseThrow(() ->
                 new ResourceNotFoundException("AbstractSlideEntity", "id", slideId));
     }
 
+    /**
+     * Retrieves all  values from the  AbstractSlideEntity  in database.
+     *  @return List<AbstractSlideEntity> .
+     *  @throws
+     */
     public List<AbstractSlideEntity> getAll() {
         return abstractSlideRepository.findAll();
     }
 
+    /**
+     * Retrieve the AbstractSlideEntity  .
+     * @param playlistId <code>Long</code>.
+     * @return AbstractSlideEntity.
+     * @throws
+     */
     public List<AbstractSlideEntity> getAllByPlaylist(Long playlistId) {
         PlaylistEntity playlistEntity = playlistService.getPlaylist(playlistId);
         return playlistEntity.getSlides();
     }
 
+    /**
+     * Deletes the AbstractSlideEntity value matching slideId.
+     * @param slideId <code>Long</code>.
+     * @throws
+     */
     public void deleteSlide(Long slideId) {
         AbstractSlideEntity slide = getSlide(slideId);
         abstractSlideRepository.delete(slide);

@@ -5,6 +5,11 @@ import com.guidewire.signagecenter.model.db.calendar.CalendarType;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+/**
+ * DTO for AbstractCalendar .
+ *
+ * @author
+ */
 
 public abstract class AbstractCalendarGetDTO {
 

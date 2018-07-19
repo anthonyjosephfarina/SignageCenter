@@ -6,7 +6,11 @@ import com.guidewire.signagecenter.model.dto.slide.AbstractSlideGetDTO;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * DTO for PlaylistGet.
+ *
+ * @author
+ */
 public class PlaylistGetDTO {
 
     private Long id;

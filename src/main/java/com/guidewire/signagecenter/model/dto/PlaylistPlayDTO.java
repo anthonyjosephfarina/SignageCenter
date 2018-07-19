@@ -4,7 +4,11 @@ import com.guidewire.signagecenter.model.dto.slide.AbstractSlideGetDTO;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * DTO for PlaylistPlay.
+ *
+ * @author
+ */
 public class PlaylistPlayDTO {
 
     private Long id;

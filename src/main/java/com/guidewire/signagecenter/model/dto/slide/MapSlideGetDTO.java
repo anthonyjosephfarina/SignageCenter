@@ -1,7 +1,11 @@
 package com.guidewire.signagecenter.model.dto.slide;
 
 import com.guidewire.signagecenter.model.db.slide.MapSlideEntity;
-
+/**
+ * DTO for MapSlideGet .
+ *
+ * @author
+ */
 public class MapSlideGetDTO extends AbstractSlideGetDTO {
 
     private Double latCoord;

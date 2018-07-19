@@ -1,7 +1,11 @@
 package com.guidewire.signagecenter.model.dto.slide;
 
 import com.guidewire.signagecenter.model.db.slide.WeatherSlideEntity;
-
+/**
+ * DTO for  WeatherSlideGet.
+ *
+ * @author
+ */
 public class WeatherSlideGetDTO extends AbstractSlideGetDTO {
 
     private Double latCoord;

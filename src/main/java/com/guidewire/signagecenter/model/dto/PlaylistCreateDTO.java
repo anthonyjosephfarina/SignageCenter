@@ -1,5 +1,9 @@
 package com.guidewire.signagecenter.model.dto;
-
+/**
+ * DTO for PlaylistCreate .
+ *
+ * @author
+ */
 public class PlaylistCreateDTO {
 
     private Long officeId;
