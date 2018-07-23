@@ -1,6 +1,6 @@
 package com.guidewire.signagecenter.controller;
 
-import com.guidewire.signagecenter.mapper.AbstractSlideGetMapper;
+import com.guidewire.signagecenter.mapper.AbstractSlideGetDTOMapper;
 import com.guidewire.signagecenter.model.db.PlaylistEntity;
 import com.guidewire.signagecenter.model.db.slide.AbstractSlideEntity;
 import com.guidewire.signagecenter.model.dto.PlaylistCreateDTO;
@@ -34,7 +34,7 @@ public class PlaylistController {
     private AbstractSlideService abstractSlideService;
 
     @Autowired
-    private AbstractSlideGetMapper slideGetMapper;
+    private AbstractSlideGetDTOMapper slideGetMapper;
 
     @PostMapping
     public PlaylistGetDTO createPlaylist(@RequestBody PlaylistCreateDTO playlistCreateDTO) {

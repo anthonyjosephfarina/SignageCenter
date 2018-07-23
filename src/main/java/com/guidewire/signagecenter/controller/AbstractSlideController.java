@@ -1,6 +1,6 @@
 package com.guidewire.signagecenter.controller;
 
-import com.guidewire.signagecenter.mapper.AbstractSlideGetMapper;
+import com.guidewire.signagecenter.mapper.AbstractSlideGetDTOMapper;
 import com.guidewire.signagecenter.model.db.slide.AbstractSlideEntity;
 import com.guidewire.signagecenter.model.dto.slide.AbstractSlideGetDTO;
 import com.guidewire.signagecenter.service.AbstractSlideService;
@@ -24,7 +24,7 @@ public class AbstractSlideController {
     private AbstractSlideService abstractSlideService;
 
     @Autowired
-    private AbstractSlideGetMapper slideGetMapper;
+    private AbstractSlideGetDTOMapper slideGetMapper;
 
     @GetMapping("/playlist/{playlistId}")
     public List<AbstractSlideGetDTO> getAllByPlaylist(@PathVariable Long playlistId,

@@ -1,5 +1,7 @@
 package com.guidewire.signagecenter.controller;
 
+import com.guidewire.signagecenter.mapper.OfficeCreateDTOMapper;
+import com.guidewire.signagecenter.mapper.OfficeGetDTOMapper;
 import com.guidewire.signagecenter.model.db.OfficeEntity;
 import com.guidewire.signagecenter.model.dto.OfficeCreateDTO;
 import com.guidewire.signagecenter.model.dto.OfficeGetDTO;
@@ -23,16 +25,20 @@ public class OfficeController {
     @Autowired
     private OfficeService officeService;
 
+    @Autowired
+    private OfficeCreateDTOMapper officeCreateDTOMapper;
+
+    @Autowired
+    private OfficeGetDTOMapper officeGetDTOMapper;
+
     @PostMapping
     public OfficeGetDTO createOffice(@RequestBody OfficeCreateDTO officeCreateDTO) {
 
         // create officeEntity
-        OfficeEntity officeEntity = new OfficeEntity();
-        officeEntity.setName(officeCreateDTO.getName());
+        OfficeEntity officeEntity = officeCreateDTOMapper.mapFromDTO(officeCreateDTO);
         officeEntity = officeService.createOffice(officeEntity);
 
-        // convert new officeEntity object to dto
-        return OfficeGetDTO.map(officeEntity);
+        return officeGetDTOMapper.mapToDTO(officeEntity);
     }
 
     @DeleteMapping("/{officeId}")
@@ -44,11 +50,11 @@ public class OfficeController {
     @GetMapping("/{officeId}")
     public OfficeGetDTO getOffice(@PathVariable Long officeId) {
         OfficeEntity officeEntity = officeService.getOffice(officeId);
-        return OfficeGetDTO.map(officeEntity);
+        return officeGetDTOMapper.mapToDTO(officeEntity);
     }
 
     @GetMapping("/all")
     public List<OfficeGetDTO> getAllOffices() {
-        return officeService.getAll().stream().map(OfficeGetDTO::map).collect(Collectors.toList());
+        return officeService.getAll().stream().map(officeGetDTOMapper::mapToDTO).collect(Collectors.toList());
     }
 }

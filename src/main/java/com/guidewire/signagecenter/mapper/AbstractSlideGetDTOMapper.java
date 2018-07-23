@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class AbstractSlideGetMapper implements DTOMapper<AbstractSlideEntity, AbstractSlideGetDTO> {
+public class AbstractSlideGetDTOMapper implements DTOMapper<AbstractSlideEntity, AbstractSlideGetDTO> {
 
     @Override
     public AbstractSlideGetDTO mapToDTO(AbstractSlideEntity abstractSlideEntity) {
