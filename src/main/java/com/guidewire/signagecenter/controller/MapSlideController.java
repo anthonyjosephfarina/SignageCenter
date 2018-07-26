@@ -37,6 +37,8 @@ public class MapSlideController {
         mapSlide.setEndDate(mapSlideCreateDTO.getEndDate());
         mapSlide = mapSlideService.createMapSlide(mapSlide, mapSlideCreateDTO.getPlaylistId());
 
+        mapSlideService.addCreateMessage(mapSlide);
+
         // convert to dto
         return MapSlideGetDTO.map(mapSlide);
     }

@@ -1,6 +1,9 @@
 package com.guidewire.signagecenter.service;
 
 import com.guidewire.signagecenter.exception.ResourceNotFoundException;
+import com.guidewire.signagecenter.messaging.MessageType;
+import com.guidewire.signagecenter.messaging.MessagingService;
+import com.guidewire.signagecenter.messaging.payload.SlideMessage;
 import com.guidewire.signagecenter.model.db.PlaylistEntity;
 import com.guidewire.signagecenter.model.db.slide.ImageSlideEntity;
 import com.guidewire.signagecenter.repository.ImageSlideRepository;
@@ -8,6 +11,7 @@ import com.guidewire.signagecenter.service.storage.ImageStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,8 +23,9 @@ import java.util.List;
  * ImageSlideService
  * @author
  */
+@Primary
 @Service
-public class ImageSlideService {
+public class ImageSlideService extends MessagingService {
     /**
      * The Logger for ImageSlideService.
      */
@@ -100,5 +105,26 @@ public class ImageSlideService {
      */
     public List<ImageSlideEntity> getAll() {
         return imageSlideRepository.findAll();
+    }
+
+    public void addCreateMessage(ImageSlideEntity imageSlide) {
+        String destination = "/topic/playlist-" + imageSlide.getPlaylist().getId();
+        SlideMessage payload = new SlideMessage(imageSlide.getId(), MessageType.SLIDE_ADD);
+
+        this.sendMessage(destination, payload);
+    }
+
+    public void addUpdateMessage(ImageSlideEntity imageSlide) {
+        String destination = "/topic/playlist-" + imageSlide.getPlaylist().getId();
+        SlideMessage payload = new SlideMessage(imageSlide.getId(), MessageType.SLIDE_UPDATE);
+
+        this.sendMessage(destination, payload);
+    }
+
+    public void addDeleteMessage(ImageSlideEntity imageSlide) {
+        String destination = "/topic/playlist-" + imageSlide.getPlaylist().getId();
+        SlideMessage payload = new SlideMessage(imageSlide.getId(), MessageType.SLIDE_DELETE);
+
+        this.sendMessage(destination, payload);
     }
 }

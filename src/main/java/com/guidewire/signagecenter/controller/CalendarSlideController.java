@@ -35,6 +35,8 @@ public class CalendarSlideController {
         calendarSlide = calendarSlideService.createCalendarSlide(calendarSlide,
                 calendarSlideCreateDTO.getPlaylistId(), calendarSlideCreateDTO.getCalendarIds());
 
+        calendarSlideService.addCreateMessage(calendarSlide);
+
         // convert to dto
         return CalendarSlideGetDTO.map(calendarSlide);
     }

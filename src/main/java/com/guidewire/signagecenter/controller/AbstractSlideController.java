@@ -56,7 +56,15 @@ public class AbstractSlideController {
 
     @DeleteMapping("/{slideId}")
     public ResponseEntity<?> deleteSlide(@PathVariable Long slideId) {
-        abstractSlideService.deleteSlide(slideId);
+        // get slide entity so we can create a new message
+        AbstractSlideEntity slide = abstractSlideService.getSlide(slideId);
+
+        // delete slide from repository
+        abstractSlideService.deleteSlide(slide);
+
+        // create new delete message
+        abstractSlideService.addDeleteMessage(slide);
+
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

@@ -1,11 +1,15 @@
 package com.guidewire.signagecenter.service;
 
 import com.guidewire.signagecenter.exception.ResourceNotFoundException;
+import com.guidewire.signagecenter.messaging.MessageType;
+import com.guidewire.signagecenter.messaging.MessagingService;
+import com.guidewire.signagecenter.messaging.payload.SlideMessage;
 import com.guidewire.signagecenter.model.db.slide.AbstractSlideEntity;
 import com.guidewire.signagecenter.repository.AbstractSlideRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -14,8 +18,9 @@ import java.util.List;
  * AbstractSlideService
  * @author
  */
+@Primary
 @Service
-public class AbstractSlideService {
+public class AbstractSlideService extends MessagingService {
 
     /**
      * The Logger for AbstractSlideService.
@@ -76,7 +81,22 @@ public class AbstractSlideService {
      * @throws
      */
     public void deleteSlide(Long slideId) {
-        AbstractSlideEntity slide = getSlide(slideId);
-        abstractSlideRepository.delete(slide);
+        deleteSlide(getSlide(slideId));
+    }
+
+    /**
+     * Deletes the AbstractSlideEntity
+     *
+     * @param abstractSlideEntity
+     */
+    public void deleteSlide(AbstractSlideEntity abstractSlideEntity) {
+        abstractSlideRepository.delete(abstractSlideEntity);
+    }
+
+    public void addDeleteMessage(AbstractSlideEntity slide) {
+        String destination = "/topic/playlist-" + slide.getPlaylist().getId();
+        SlideMessage payload = new SlideMessage(slide.getId(), MessageType.SLIDE_DELETE);
+
+        this.sendMessage(destination, payload);
     }
 }

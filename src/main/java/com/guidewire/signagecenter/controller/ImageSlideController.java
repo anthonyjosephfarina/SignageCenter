@@ -43,6 +43,8 @@ public class ImageSlideController {
         imageSlide.setEndDate(imageSlideCreateDTO.getEndDate());
         imageSlide = imageSlideService.createImageSlide(imageSlide, imageSlideCreateDTO.getPlaylistId());
 
+        imageSlideService.addCreateMessage(imageSlide);
+
         // convert to dto
         return ImageSlideGetDTO.map(imageSlide);
     }

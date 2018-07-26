@@ -14,8 +14,7 @@ public class CalendarSlideEntity extends AbstractSlideEntity {
     @Column(length = 100)
     private String title;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "calendar_id")
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<AbstractCalendarEntity> calendars = new ArrayList<>();
 
     public String getTitle() {

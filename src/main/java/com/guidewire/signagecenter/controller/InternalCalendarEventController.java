@@ -32,12 +32,22 @@ public class InternalCalendarEventController {
         internalCalendarEventEntity.setAllDay(internalCalendarEventCreateDTO.isAllDay());
         internalCalendarEventEntity = internalCalendarEventService.create(internalCalendarEventEntity, internalCalendarEventCreateDTO.getCalendarId());
 
+        internalCalendarEventService.addCreateMessage(internalCalendarEventEntity);
+
         return CalendarEventGetDTO.map(internalCalendarEventEntity);
     }
 
     @DeleteMapping("/{calendarEventId}")
     public ResponseEntity<?> deleteCalendarEvent(@PathVariable Long calendarEventId) {
-        internalCalendarEventService.delete(calendarEventId);
+        // need entity for message
+        InternalCalendarEventEntity internalCalendarEventEntity = internalCalendarEventService.getCalendarEvent(calendarEventId);
+
+        // delete the entity
+        internalCalendarEventService.delete(internalCalendarEventEntity);
+
+        // create new message
+        internalCalendarEventService.addDeleteMessage(internalCalendarEventEntity);
+
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
